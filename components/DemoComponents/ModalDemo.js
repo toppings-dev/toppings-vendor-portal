@@ -42,19 +42,4 @@ const ModalDemo = (props) => {
     );
 };
 
-// function mapStateToProps(state) {
-//     return {
-//         counter: state.testReducer.counter,
-//         counterMultiplied: state.testReducer.counterMultiplied
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     return {
-//         increaseCounter: (cons) => dispatch({ type: 'INCREASE_COUNTER', constant: cons }),
-//         decreaseCounter: () => dispatch({ type: 'DECREASE_COUNTER' }),
-//     }
-// }
-
-// export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(ModalDemo))
 export default ModalDemo;

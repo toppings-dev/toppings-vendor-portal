@@ -66,12 +66,12 @@ const ProfilePhotoScreen =(props) => {
 
         if (!result.cancelled) {
             setImage(result.uri);
-            setProfiliePic(result.uri)
+            setProfilePic(result.uri)
         }
     }
 
     const imageSRC = profilePic ? { uri: profilePic } : require('assets/images/profile-placeholder.png')
-    const componentStyles = StyleSheet.create({
+    const containerStyles = StyleSheet.create({
         container: {
             position: 'absolute',
             backgroundColor: colors.base,
@@ -105,7 +105,7 @@ const ProfilePhotoScreen =(props) => {
     });
 
     return (
-        <View style={styles.container}>
+        <View style={containerStyles.container}>
             <View style={{height:25}}/>
             <Text style={[styles.h2, styles.bold, styles.pad]}>Pick a photo!</Text>
 
@@ -123,7 +123,7 @@ const ProfilePhotoScreen =(props) => {
             <PrimaryButton 
                 loading={loading} 
                 text={"That's me 👐"} 
-                onPress={()=> t_handleNextStep()} 
+                onPress={()=> _handleNextStep()} 
                 disabled={!image}
                 fullWidth={true}
                 rounded={true}

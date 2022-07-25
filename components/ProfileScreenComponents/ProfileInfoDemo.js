@@ -55,23 +55,4 @@ const ProfileInfoDemo = (props) => {
     );
 };
 
-// function mapStateToProps(state) {
-//     return {
-//         firstName: state.profileReducer.firstName,
-//         lastName: state.profileReducer.lastName,
-//         phoneNumber: state.profileReducer.phoneNumber,
-//         handle: state.profileReducer.handle,
-//         uid: state.profileReducer.firebaseAuthResult.user ? state.profileReducer.firebaseAuthResult.user.uid : null
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     return {
-//         increaseCounter: (cons) => dispatch({ type: 'INCREASE_COUNTER', constant: cons }),
-//         decreaseCounter: () => dispatch({ type: 'DECREASE_COUNTER' }),
-//     }
-// }
-
-
-// export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(ProfileInfoDemo))
 export default ProfileInfoDemo;

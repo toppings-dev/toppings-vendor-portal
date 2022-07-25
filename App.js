@@ -12,7 +12,6 @@ import AppLoading from 'expo-app-loading';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { store, persistor } from './redux'
 import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
 import { AppearanceProvider } from 'react-native-appearance';
 import {ThemeProvider} from 'assets/styles/ThemeProvider';
 
@@ -82,11 +81,6 @@ export class App extends Component {
         return (
             <AppearanceProvider>
             <ThemeProvider>
-            <Provider store={store}>
-            <PersistGate 
-                    persistor={persistor} 
-                    loading={null}
-                >
                 <SafeAreaProvider>
                 <Root>
                         <StatusBar style="light" />
@@ -106,8 +100,6 @@ export class App extends Component {
                     </View>
                 </Root>
                 </SafeAreaProvider>
-            </PersistGate>
-            </Provider>
             </ThemeProvider>
             </AppearanceProvider>
         )

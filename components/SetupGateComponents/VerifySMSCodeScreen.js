@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 // var Global = require('assets/styles/global');
-import { connect } from 'react-redux'
 
 import UserAPI from 'clientAPI/users.js'
 
@@ -148,16 +147,4 @@ const VerifySMSCodeScreen = (props) => {
 
 }
 
-function mapStateToProps(state) {
-    return {
-    }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        increaseCounter: (cons) => dispatch({ type: 'INCREASE_COUNTER', constant: cons }),
-        decreaseCounter: () => dispatch({ type: 'DECREASE_COUNTER' }),
-    }
-}
-
-export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(VerifySMSCodeScreen))
+export default VerifySMSCodeScreen;

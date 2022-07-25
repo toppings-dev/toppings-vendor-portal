@@ -116,19 +116,4 @@ const PhoneNumberScreen = (props) => {
     );
 }
 
-// function mapStateToProps(state) {
-//     return {
-//         phoneNumber: state.profileReducer.phoneNumber,
-//         AWS_USERDATA: state.profileReducer.AWS_USERDATA
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     return {
-//         updatePhoneNumber: (cons) => dispatch({ type: 'UPDATE_PHONENUMBER', phoneNumber: cons }),
-//     }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(TemplateComponent);
-//export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(PhoneNumberScreen))
 export default PhoneNumberScreen;

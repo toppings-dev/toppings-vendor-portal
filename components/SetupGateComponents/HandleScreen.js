@@ -124,17 +124,4 @@ const HandleScreen = (props) => {
     );
 };
 
-// function mapStateToProps(state) {
-//     return {
-//         handle: state.profileReducer.handle
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     return {
-//         updateHandle: (cons) => dispatch({ type: 'UPDATE_HANDLE', handle: cons }),
-//     }
-// }
-
-// export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(PhoneNumberScreen))
 export default HandleScreen;
