@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import {ThemeContext} from 'assets/styles/ThemeProvider';
-import { connect } from 'react-redux'
 
 import PrimaryButton from 'components/elements/PrimaryButton'
 import * as Linking from 'expo-linking';
@@ -100,16 +99,17 @@ class AccessCodeGate extends React.Component {
     }
 };
 
-function mapStateToProps(state) {
-    return {
-    }
-}
+// function mapStateToProps(state) {
+//     return {
+//     }
+// }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        increaseCounter: (cons) => dispatch({ type: 'INCREASE_COUNTER', constant: cons }),
-        decreaseCounter: () => dispatch({ type: 'DECREASE_COUNTER' }),
-    }
-}
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//     return {
+//         increaseCounter: (cons) => dispatch({ type: 'INCREASE_COUNTER', constant: cons }),
+//         decreaseCounter: () => dispatch({ type: 'DECREASE_COUNTER' }),
+//     }
+// }
 
-export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(AccessCodeGate))
+// export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(AccessCodeGate))
+export default AccessCodeGate
