@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { createStackNavigator, CardStyleInterpolators, TransitionPresets } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-
 import GetStartedScreen from 'components/SetupGateComponents/GetStartedScreen'
 import PhoneNumberScreen from 'components/SetupGateComponents/PhoneNumberScreen'
 import VerifySMSCodeScreen from 'components/SetupGateComponents/VerifySMSCodeScreen'
@@ -14,7 +13,8 @@ const SetupGateStackScreen = (props) => {
     return (
         <SetupGateStack.Navigator
             screenOptions={({route, navigation}) => ({
-              headerShown: false
+              headerShown: false,
+              animationEnabled: Platform.OS == 'android' ? false : true,
             })}
         >
             <SetupGateStack.Screen

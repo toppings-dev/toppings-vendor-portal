@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     StyleSheet,
     Text,
@@ -13,126 +13,115 @@ import { connect } from 'react-redux'
 import LocalAPI from 'clientAPI/local.js'
 import UserAPI from 'clientAPI/users.js'
 
-import {ThemeContext} from 'assets/styles/ThemeProvider';
+import {useTheme} from 'assets/styles/ThemeProvider';
 
 import PrimaryButton from 'components/elements/PrimaryButton'
 
 
-class PhoneNumberScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false,
-            failure: false,
-            error: "",
-        };
-    }
+//class PhoneNumberScreen extends React.Component {
+const PhoneNumberScreen = (props) => {
+    const [loading, setLoading] = useState(false);
+    const [failure, setFailure] = useState(false);
+    const [error, setError] = useState("");
+    const [firstName, setFirstName] = useState("");
 
-    static contextType = ThemeContext;
+    const {colors, styles} = useTheme(); // including styles here gives func comps access to styles
 
-    async _handleNextStep() {
-        this.setState({ loading: true, failure: false });
-        let source = this.props.navigation.dangerouslyGetState().routes[0]?.params?.source || "Gate"
+    const _handleNextStep = async () => {
+        setLoading(true);
+        setFailure(false);
+        let source = props.navigation.dangerouslyGetState().routes[0]?.params?.source || "Gate"
 
         // await LocalAPI.sleep(500)
         let nameOK = true; 
         if (nameOK) {
              // Go Back if In Settings + Update to Backend
             if (source == "Settings") {
-                let r  = await UserAPI.updateUserAppSync({name: this.props.firstName})
+                let r  = await UserAPI.updateUserAppSync({name: firstName})
                 
                 if (!r.success){
-                    this.setState({ loading: false, failure: true, error: r.data });
+                    setLoading(false);
+                    setFailure(true);
+                    setError(r.data);
                     return
                 }
-                
-                this.setState({ loading: false, failure: false });
-                this.props.navigation.goBack()
+                setLoading(false);
+                setFailure(false);                
+               props.navigation.goBack()
                 return
             }
-            this.setState({ loading: false, failure: false });
-            this.props.navigation.navigate("PhoneNumber")
+            setLoading(false);
+            setFailure(false);
+            console.log("navigate to phone", props.navigation);
+            props.navigation.navigate("PhoneNumber")
             return
         }
 
         if (!nameOK) {
-            this.setState({ loading: false, failure: true });
+            setLoading(false);
+            setFailure(true);
             return;
         }
     }
 
-    render() {
-        const styles = StyleSheet.create({
-            container: {
-                position: 'absolute',
-                alignItems: 'flex-start',
-                justifyContent: 'space-between',
-                paddingTop: 45,
-                paddingBottom: "20%",
-                width: "100%",
-                height: "100%",
-                paddingHorizontal: 20,
-                paddingTop: "20%",
-                zIndex: 1,
-                backgroundColor: this.context.colors.base
-            },
-        
-            description: {
-                width: "65%",
-                textAlign: 'center',
-                marginVertical: 15
-            }
-        });
-        return (
-            <View style={styles.container}>
-                <View style={{width: "100%"}}>
-                    <Text style={[this.context.styles.h2, this.context.styles.bold]}>What's your first name?</Text>
-                    <TextInput 
-                        placeholder="Mary" 
-                        placeholderTextColor="#aaa"
-                        style={{...this.context.styles.textInput,
-                            ...this.context.styles.h2}}
-                        textContentType="givenName"
-                        value={this.props.firstName}
-                        onChangeText={(text)=> this.props.updateFirstName(text)}
-                        autoFocus={true}
-                        autoCorrect= {false}
-                    />
+    const componentStyles = StyleSheet.create({
+        container: {
+            position: 'absolute',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            paddingTop: 45,
+            paddingBottom: "20%",
+            width: "100%",
+            height: "100%",
+            paddingHorizontal: 20,
+            paddingTop: "20%",
+            zIndex: 1,
+            backgroundColor: colors.base
+        },
+    
+        description: {
+            width: "65%",
+            textAlign: 'center',
+            marginVertical: 15
+        }
+    });
+    return (
+        <View style={componentStyles.container}>
+            <View style={{width: "100%"}}>
+                <Text style={[styles.h2, styles.bold]}>What's your first name?</Text>
+                <TextInput 
+                    placeholder="Mary" 
+                    placeholderTextColor="#aaa"
+                    style={{...styles.textInput,
+                        ...styles.h2}}
+                    textContentType="givenName"
+                    value={firstName}
+                    onChangeText={(text)=> setFirstName(text)}
+                    autoFocus={true}
+                    autoCorrect= {false}
+                />
 
-                    { this.state.failure ? <Text style={[this.context.styles.h3, {color: 'red'}]}>Oops! There was an error: {this.state.error}.</Text> :null}
+                { failure ? <Text style={[styles.h3, {color: 'red'}]}>Oops! There was an error: {error}.</Text> :null}
 
-                    <Text style={this.context.styles.h3}>Please use your real name. Thanks!</Text>
-                    <View style={{height:15}}/>
-                </View>
-
-                <KeyboardAvoidingView 
-                    behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-                    style={{width: "100%", marginBottom: "40%"}}
-                >
-                    <PrimaryButton 
-                        loading={this.state.loading}
-                        text={"That’s me 😎"} 
-                        onPress={()=> this._handleNextStep()}
-                        disabled={(this.props.firstName.length < 1)}
-                        fullWidth={true}
-                        rounded={true}
-                    />
-                </KeyboardAvoidingView>
+                <Text style={styles.h3}>Please use your real name. Thanks!</Text>
+                <View style={{height:15}}/>
             </View>
-        );
-    }
+
+            <KeyboardAvoidingView 
+                behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+                style={{width: "100%", marginBottom: "40%"}}
+            >
+                <PrimaryButton 
+                    loading={loading}
+                    text={"That’s me 😎"} 
+                    onPress={()=> _handleNextStep()}
+                    disabled={(firstName.length < 1)}
+                    fullWidth={true}
+                    rounded={true}
+                />
+            </KeyboardAvoidingView>
+        </View>
+    );
 };
 
-function mapStateToProps(state) {
-    return {
-        firstName: state.profileReducer.firstName,
-    }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        updateFirstName: (cons) => dispatch({ type: 'UPDATE_FIRSTNAME', firstName: cons }),
-    }
-}
-
-export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(PhoneNumberScreen))
+export default PhoneNumberScreen;
