@@ -64,7 +64,6 @@ const initializeFirebase = async () => {
     try {
         if (firebase.apps.length == 0){
             firebase.initializeApp(firebaseConfig);
-            console.log("filrebase init success");
         }
     } 
     catch (error) {

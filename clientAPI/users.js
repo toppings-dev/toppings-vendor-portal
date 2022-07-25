@@ -66,7 +66,6 @@ module.exports.authenticateUser = async () => {
     await until(() => isLoggedIn !== undefined)
 
     if (!isLoggedIn){
-        console.log("throw error not logged in");
         throw new Error("Not logged in.")
     }
 
