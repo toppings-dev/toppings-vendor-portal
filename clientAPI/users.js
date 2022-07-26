@@ -1,4 +1,4 @@
-import { store } from '../redux';
+//import { store } from '../redux';
 import * as firebase from 'firebase';
 
 // needs to be of form "+181813014953". 
@@ -31,7 +31,7 @@ module.exports.signUp = async (phoneNumber, recaptchaVerifier) => {
         );
 
         if (verificationId){
-            store.dispatch({ type: 'UPDATE_FIREBASE_VERIFICATIONID', firebaseVerificationID: verificationId })
+            //store.dispatch({ type: 'UPDATE_FIREBASE_VERIFICATIONID', firebaseVerificationID: verificationId })
             return {success: true, data: "Verification code Sent."}
         }
         
@@ -82,7 +82,7 @@ module.exports.updateHandle = async (handle) => {
 module.exports.signOut = async () => {
     try {
         let r = await firebase.auth().signOut()
-        store.dispatch({ type: 'CLEAR_USERDATA'})
+        //store.dispatch({ type: 'CLEAR_USERDATA'})
         return {
             success: true, 
             data: r
@@ -98,20 +98,20 @@ module.exports.signOut = async () => {
 
 module.exports.verifyOTP = async (verificationCode) => {
     try {
-        let firebaseVerificationID = store.getState().profileReducer.firebaseVerificationID;
-        const credential = firebase.auth.PhoneAuthProvider.credential(
-            firebaseVerificationID,
-            verificationCode
-        );
+        //let firebaseVerificationID = store.getState().profileReducer.firebaseVerificationID;
+        // const credential = firebase.auth.PhoneAuthProvider.credential(
+        //     firebaseVerificationID,
+        //     verificationCode
+        // );
 
-        firebase.auth().setPersistence('local')
+        // firebase.auth().setPersistence('local')
 
-        const authResult = await firebase.auth().signInWithCredential(credential);
-        store.dispatch({ type: 'UPDATE_FIREBASE_AUTHRESULT', firebaseAuthResult: authResult })
-        return {
-            success: true,
-            data: authResult
-        }
+        // const authResult = await firebase.auth().signInWithCredential(credential);
+        // store.dispatch({ type: 'UPDATE_FIREBASE_AUTHRESULT', firebaseAuthResult: authResult })
+        // return {
+        //     success: true,
+        //     data: authResult
+        // }
 
     } 
     catch (err) {

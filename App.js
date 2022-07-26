@@ -10,8 +10,6 @@ import AppLoading from 'expo-app-loading';
 
 // 3rd Party Libraries
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { store, persistor } from './redux'
-import { Provider } from 'react-redux'
 import { AppearanceProvider } from 'react-native-appearance';
 import {ThemeProvider} from 'assets/styles/ThemeProvider';
 

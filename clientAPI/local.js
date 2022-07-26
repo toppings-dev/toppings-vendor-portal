@@ -1,7 +1,6 @@
 import {
     Alert
 } from 'react-native';
-import { store } from '../redux';
 import { Linking } from 'expo';
 import { Toast } from 'native-base';
 // var Global = require('assets/styles/global');
