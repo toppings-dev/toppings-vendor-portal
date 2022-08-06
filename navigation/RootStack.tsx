@@ -22,7 +22,7 @@ const quickModal = {
     headerShown: false,
     animationEnabled: true,
     gestureEnabled: false,
-    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+    //cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
     ...TransitionPresets.ModalPresentationIOS,
     cardOverlayEnabled: true,
     transitionSpec: {

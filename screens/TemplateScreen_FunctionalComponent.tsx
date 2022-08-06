@@ -6,14 +6,14 @@ import {
 
 import SafeAreaView from 'react-native-safe-area-view';
 
-import ModalDemo from '../components/HomeScreenComponents/ModalDemo';
+import ModalDemo from '~/components/DemoComponents/ModalDemo';
 
 import {useTheme} from 'assets/styles/ThemeProvider';
 
 export default function TemplateScreen(props) {
     const {colors, styles} = useTheme(); // including styles here gives func comps access to styles
 
-    const styles = StyleSheet.create({
+    const newStyles = StyleSheet.create({
         container: {
             backgroundColor: colors.background,
             flex: 1,
@@ -41,7 +41,7 @@ export default function TemplateScreen(props) {
         // in react functional components. 
         // NEED TO UNDERSTAND RIGHT AWAY: IS THIS COMPONENT FUNC OR CLASS?
         // if it's a functional component, you can use hooks. (class component canNOT use hooks)
-        <SafeAreaView style={styles.container} forceInset={{bottom:'never', top:'always'}}>
+        <SafeAreaView style={newStyles.container} forceInset={{bottom:'never', top:'always'}}>
             <ModalDemo {...props} />
             <Switch value={isDark} onValueChange={toggleScheme}/>
         </SafeAreaView>

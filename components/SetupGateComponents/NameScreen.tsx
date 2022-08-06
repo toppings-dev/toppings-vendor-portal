@@ -10,8 +10,8 @@ import {
 
 // var Global = require('assets/styles/global');
 import { connect } from 'react-redux'
-import LocalAPI from 'clientAPI/local.js'
-import UserAPI from 'clientAPI/users.js'
+import * as LocalAPI from 'clientAPI/local'
+import * as UserAPI from 'clientAPI/users'
 
 import {useTheme} from 'assets/styles/ThemeProvider';
 
@@ -36,20 +36,20 @@ const PhoneNumberScreen = (props) => {
         let nameOK = true; 
         if (nameOK) {
              // Go Back if In Settings + Update to Backend
-            if (source == "Settings") {
-                let r  = await UserAPI.updateUserAppSync({name: firstName})
+            // if (source == "Settings") {
+            //     let r  = await UserAPI.updateUserAppSync({name: firstName})
                 
-                if (!r.success){
-                    setLoading(false);
-                    setFailure(true);
-                    setError(r.data);
-                    return
-                }
-                setLoading(false);
-                setFailure(false);                
-               props.navigation.goBack()
-                return
-            }
+            //     if (!r.success){
+            //         setLoading(false);
+            //         setFailure(true);
+            //         setError(r.data);
+            //         return
+            //     }
+            //     setLoading(false);
+            //     setFailure(false);                
+            //    props.navigation.goBack()
+            //     return
+            // }
             setLoading(false);
             setFailure(false);
             console.log("navigate to phone", props.navigation);
@@ -69,7 +69,6 @@ const PhoneNumberScreen = (props) => {
             position: 'absolute',
             alignItems: 'flex-start',
             justifyContent: 'space-between',
-            paddingTop: 45,
             paddingBottom: "20%",
             width: "100%",
             height: "100%",

@@ -11,6 +11,9 @@ import {ThemeContext} from 'assets/styles/ThemeProvider';
 
 // export default function OneContactScreen(props) {
 class TemplateScreen extends React.Component {
+	public state: any;
+	public context: any;
+
     constructor(props) {
         super(props)
         this.state = {}

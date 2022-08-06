@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 
 // needs to be of form "+181813014953". 
 // we do our best to clean it up.
-cleanUpPhoneNumber = (phoneNumber) => {
+const cleanUpPhoneNumber = (phoneNumber) => {
     phoneNumber = phoneNumber.replace(/[^0-9]/g, '');
     if (phoneNumber.length != 12){
         // likely just missing the +
@@ -20,7 +20,7 @@ cleanUpPhoneNumber = (phoneNumber) => {
     }
 }
 
-module.exports.signUp = async (phoneNumber, recaptchaVerifier) => {   
+const signUp = async (phoneNumber, recaptchaVerifier) => {   
     try {
         phoneNumber = cleanUpPhoneNumber(phoneNumber)
 
@@ -40,7 +40,7 @@ module.exports.signUp = async (phoneNumber, recaptchaVerifier) => {
     }
 }
 
-module.exports.authenticateUser = async () => {
+const authenticateUser = async () => {
     let isLoggedIn = undefined;
 
     firebase.auth().onAuthStateChanged( user => {
@@ -53,7 +53,7 @@ module.exports.authenticateUser = async () => {
     })
 
     function until(condition) {
-        return new Promise((resolve) => {
+        return new Promise<void>((resolve) => {
             const interval = setInterval(() => {
                 if (condition()) {
                 clearInterval(interval);
@@ -72,14 +72,14 @@ module.exports.authenticateUser = async () => {
     firebase.auth().currentUser.getIdToken()
 }
 
-module.exports.updateHandle = async (handle) => {
+const updateHandle = async (handle) => {
     return {
         success: true,
         data: "TODO: UPDATE HANDLE"
     }
 }
 
-module.exports.signOut = async () => {
+const signOut = async () => {
     try {
         let r = await firebase.auth().signOut()
         //store.dispatch({ type: 'CLEAR_USERDATA'})
@@ -96,7 +96,7 @@ module.exports.signOut = async () => {
     }
 }
 
-module.exports.verifyOTP = async (verificationCode) => {
+const verifyOTP = async (verificationCode) => {
     try {
         //let firebaseVerificationID = store.getState().profileReducer.firebaseVerificationID;
         // const credential = firebase.auth.PhoneAuthProvider.credential(
@@ -122,7 +122,13 @@ module.exports.verifyOTP = async (verificationCode) => {
     }
 }
 
-module.exports._test = async () => {
+const _test = async () => {
     console.log('succes');
     return 'test successful';
 }
+
+class UserAPI {
+  
+}
+
+export { signUp, authenticateUser, updateHandle, signOut, verifyOTP, _test };

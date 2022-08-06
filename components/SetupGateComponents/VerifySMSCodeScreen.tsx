@@ -9,7 +9,7 @@ import {
 
 // var Global = require('assets/styles/global');
 
-import UserAPI from 'clientAPI/users.js'
+import * as UserAPI from 'clientAPI/users'
 
 import PrimaryButton from 'components/elements/PrimaryButton'
 
@@ -60,7 +60,6 @@ const VerifySMSCodeScreen = (props) => {
             backgroundColor: colors.base,
             alignItems: 'flex-start',
             justifyContent: 'space-between',
-            paddingTop: 45,
             paddingBottom: "20%",
             width: "100%",
             height: "100%",
