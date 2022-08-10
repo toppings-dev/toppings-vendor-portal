@@ -7,7 +7,7 @@ import {
 
 import {useTheme} from 'assets/styles/ThemeProvider';
 
-import PrimaryButton from 'components/elements/PrimaryButton.js'
+import PrimaryButton from 'components/elements/PrimaryButton'
 
 const ModalDemo = (props) => {
     const {colors, styles} = useTheme(); // including styles here gives func comps access to styles

@@ -21,7 +21,7 @@ const PrimaryButton = (props) => {
     }
     const {colors, styles} = useTheme(); // including styles here gives func comps access to styles
 
-    const componentStyles = {
+    const componentStyles = StyleSheet.create({
         button: {
             width: "100%",
             backgroundColor: "black",
@@ -46,7 +46,7 @@ const PrimaryButton = (props) => {
             alignItems: 'center',
             flex: 0,
         },
-    }
+    });
 
     return (
         <TouchableOpacity 

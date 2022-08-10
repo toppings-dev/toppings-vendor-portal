@@ -9,6 +9,9 @@ import {ThemeContext} from 'assets/styles/ThemeProvider';
 import SampleModalComponent from 'components/SampleModalScreenComponents/SampleModalComponent'
 
 class TemplateScreen extends React.Component {
+	public state: any;
+	public context: any;
+
     constructor(props) {
         super(props)
         this.state = {}

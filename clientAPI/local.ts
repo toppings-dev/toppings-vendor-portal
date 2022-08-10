@@ -1,8 +1,7 @@
 import {
     Alert
 } from 'react-native';
-import { store } from '../redux';
-import { Linking } from 'expo';
+import Linking from 'expo-linking';
 import { Toast } from 'native-base';
 // var Global = require('assets/styles/global');
 import * as Device from 'expo-device';
@@ -90,7 +89,7 @@ const loadFonts = async () => {
 }
 
 // run this every time app is initialized
-module.exports.startupSequence = async () => {
+const startupSequence = async () => {
     try {
         await loadFonts();
         await checkDevicePermissions();
@@ -109,6 +108,8 @@ module.exports.startupSequence = async () => {
 }
 
 // sleep time expects milliseconds
-module.exports.sleep = async (time) => {
+const sleep = async (time) => {
     return new Promise((resolve) => setTimeout(resolve, time));
 }
+
+export { startupSequence, sleep }

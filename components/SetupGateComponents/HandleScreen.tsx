@@ -10,8 +10,10 @@ import {
 } from 'react-native';
 
 import {useTheme} from 'assets/styles/ThemeProvider';
-import LocalAPI from 'clientAPI/local.js'
-import UserAPI from 'clientAPI/users.js'
+// import * as LocalAPI from 'clientAPI/local'
+import * as UserAPI from 'clientAPI/users'
+import * as LocalAPI from 'clientAPI/local'
+// import UserAPI from 'clientAPI/users'
 
 import PrimaryButton from 'components/elements/PrimaryButton'
 
@@ -52,7 +54,7 @@ const HandleScreen = (props) => {
             return
         }
 
-        if (!codeSent) {
+        if (!handleValid) {
             setLoading(false);
             setFailure(true);
             return;
@@ -65,12 +67,11 @@ const HandleScreen = (props) => {
             backgroundColor: colors.base,
             alignItems: 'flex-start',
             justifyContent: 'space-between',
-            paddingTop: 45,
+            paddingTop: "20%",
             paddingBottom: "20%",
             width: "100%",
             height: "100%",
             paddingHorizontal: 20,
-            paddingTop: "20%",
         },
     
         textInput: {

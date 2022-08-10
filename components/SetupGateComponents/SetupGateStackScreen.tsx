@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Platform} from 'react-native';
 import { createStackNavigator, CardStyleInterpolators, TransitionPresets } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import GetStartedScreen from 'components/SetupGateComponents/GetStartedScreen'

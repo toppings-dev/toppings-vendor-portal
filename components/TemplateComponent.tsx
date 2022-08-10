@@ -9,6 +9,9 @@ import { connect } from 'react-redux'
 import {ThemeContext} from 'assets/styles/ThemeProvider';
 
 class TemplateComponent extends React.Component {
+	public state: any;
+	context: any = {};
+
     constructor(props) {
         super(props);
         this.state = {};

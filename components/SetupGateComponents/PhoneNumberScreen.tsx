@@ -9,8 +9,8 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 
-import LocalAPI from 'clientAPI/local.js'
-import UserAPI from 'clientAPI/users.js'
+import * as LocalAPI from 'clientAPI/local'
+import * as UserAPI from 'clientAPI/users'
 
 import PrimaryButton from 'components/elements/PrimaryButton'
 import * as FirebaseRecaptcha from 'expo-firebase-recaptcha';
@@ -25,7 +25,7 @@ const PhoneNumberScreen = (props) => {
     const [errorText, setErrorText] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
 
-    const recaptchaVerifier = React.createRef();
+    const recaptchaVerifier = React.createRef()[0];
 
     const {colors, styles} = useTheme(); // including styles here gives func comps access to styles
 
@@ -59,7 +59,6 @@ const PhoneNumberScreen = (props) => {
             backgroundColor: colors.base,
             alignItems: 'flex-start',
             justifyContent: 'space-between',
-            paddingTop: 45,
             paddingBottom: "20%",
             width: "100%",
             height: "100%",

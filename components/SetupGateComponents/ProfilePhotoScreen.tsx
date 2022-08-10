@@ -10,18 +10,19 @@ import {
 } from 'react-native';
 
 // var Global = require('assets/styles/global');
-import LocalAPI from 'clientAPI/local.js'
+import * as LocalAPI from 'clientAPI/local'
 
 import PrimaryButton from 'components/elements/PrimaryButton'
 import * as ImagePicker from 'expo-image-picker';
+import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
 
 import {useTheme} from 'assets/styles/ThemeProvider';
 
 const ProfilePhotoScreen =(props) => {
     const [loading, setLoading] = useState(false);
     const [failure, setFailure] = useState(false);
-    const [image, setImage] = useState();
-    const [profilePic, setProfilePic] = useState();
+    const [image, setImage] = useState('');
+    const [profilePic, setProfilePic] = useState('');
 
     const {colors, styles} = useTheme(); // including styles here gives func comps access to styles
 
@@ -65,8 +66,9 @@ const ProfilePhotoScreen =(props) => {
         console.log(result);
 
         if (!result.cancelled) {
-            setImage(result.uri);
-            setProfilePic(result.uri)
+          const { uri } = result as ImageInfo
+            setImage(uri);
+            setProfilePic(uri);
         }
     }
 
@@ -77,7 +79,6 @@ const ProfilePhotoScreen =(props) => {
             backgroundColor: colors.base,
             alignItems: 'center',
             justifyContent: 'flex-start',
-            paddingTop: 45,
             paddingBottom: "20%",
             width: "100%",
             height: "100%",
@@ -94,7 +95,7 @@ const ProfilePhotoScreen =(props) => {
             ...styles.h2,
             borderRadius: 7,
             textAlign: 'center',
-            borderColor: colors.primaryColor,
+            borderColor: colors.primary,
             borderWidth: 1
         },
     

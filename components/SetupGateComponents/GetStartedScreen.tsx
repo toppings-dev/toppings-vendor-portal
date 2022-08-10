@@ -14,6 +14,12 @@ import * as Linking from 'expo-linking';
 
 
 class AccessCodeGate extends React.Component {
+	public state: any;
+	public props: any;
+	public context: any;
+  //idk if this is broken
+  //used to be public state: any , public props...
+
     constructor(props) {
         super(props);
         this.state = {};

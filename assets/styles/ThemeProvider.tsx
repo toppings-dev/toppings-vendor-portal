@@ -3,13 +3,13 @@ import {useColorScheme} from 'react-native-appearance';
 import {lightColors, darkColors} from './colorThemes';
 import {getStyles} from './commonStyles';
 
-const styles = {};
+const styles: any = {};
 
 export const ThemeContext = React.createContext({
     isDark: true,
     colors: darkColors,
     styles: styles,
-    setScheme: () => {},
+    setScheme: (scheme: any) => {},
 });
 
 export const ThemeProvider = (props) => {
