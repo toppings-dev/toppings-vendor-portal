@@ -20,8 +20,8 @@ import SetupGate from 'components/SetupGateComponents/SetupGateNavigator'
 import { Root } from "native-base";
 
 export class App extends Component {
-	state: any = {};
-	public setState: any;
+	declare state: any;
+	declare setState: any;
 
     constructor(props) {
         super(props);
