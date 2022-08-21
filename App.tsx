@@ -18,24 +18,12 @@ var LocalAPI = require('./clientAPI/local');
 import AppNavigator from './navigation/AppNavigator';
 import SetupGate from 'components/SetupGateComponents/SetupGateNavigator'
 import { Root } from "native-base";
-
-import 'react-native-get-random-values';
-import 'react-native-url-polyfill/auto';
-
-import { Connection, clusterApiUrl, Keypair } from "@solana/web3.js"; 
+import "./shim";
 
 const App = () => {
     const [isLoadingComplete, setIsLoadingComplete] = useState<Boolean>(false);
     const [showSetupGate, setShowSetupGate] = useState<Boolean>(false);
 
-    const conn = new Connection(clusterApiUrl('devnet'));
-    const [version, setVersion] = useState<any>('');
-    const [keypair, setKeypair] = useState<Keypair>(() => Keypair.generate());
-    
-    const randomKeypair = () => {
-      setKeypair(() => Keypair.generate());
-    };
-    
 
     useEffect(()=>{
         LogBox.ignoreLogs([
@@ -45,11 +33,7 @@ const App = () => {
         SplashScreen.preventAutoHideAsync()
         loadResourcesAsync()
     
-        if (version) {
-            return;
-          }
-        conn.getVersion().then(r => setVersion(r));
-    }, [version, setVersion]);
+    }, []);
 
     const loadResourcesAsync = async () => {
         await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
