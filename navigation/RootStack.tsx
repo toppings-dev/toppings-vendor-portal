@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createStackNavigator, CardStyleInterpolators, TransitionPresets } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import awsConfig from '../utils/awsConfig';
+import Amplify from 'aws-amplify';
+// import { useQuery } from '@apollo/client';
+// import * as customQueries from '../graphql/customQueries';
 
 // Theme
 // var Global = require('../assets/styles/global');
@@ -17,6 +22,9 @@ import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import SampleModalScreen from '../screens/SampleModalScreen';
 import SetupGateStackScreen from 'components/SetupGateComponents/SetupGateStackScreen'
+import OrdersScreen from '../screens/OrdersScreen';
+
+Amplify.configure(awsConfig);
 
 const quickModal = {
     headerShown: false,
@@ -126,13 +134,29 @@ const ModalStackScreen = () => {
                 }}
                 
             />
+            
+
 
         </ModalStack.Navigator>
     )
 }
 
 const RootStack = createStackNavigator();
-const RootStackScreen = () => {
+const RootStackScreen = (props) => {
+  const [restaurant, setRestaurant] = useState();
+  const { currentUser } = props;
+
+  // let { data, error, loading } = useQuery(customQueries.GET_RESTAURANT_BY_OWNER, {
+  //   skip: currentUser.username === 'all@gmail.com',
+  // });
+  // if (error) {
+  //   console.log("error", error);
+  // }
+  // console.log("data", data);
+  // if (data?.getRestaurantByOwner) {
+  //   setRestaurant(data.getRestaurantByOwner);
+  // }
+
     return (
         <RootStack.Navigator
           screenOptions={({route, navigation}) => ({
@@ -146,6 +170,13 @@ const RootStackScreen = () => {
             })}
             mode="modal"
         >
+            <RootStack.Screen
+                name="Orders"
+                component={OrdersScreen}
+                options={{ headerShown: false }}
+                initialParams={{...props, restaurant}}
+            />
+          
             <RootStack.Screen
                 name="Tabs"
                 component={TabScreen}

@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import SetupGateStackScreen from "./SetupGateStackScreen"
 
+
 export default function AppNavigator(props) {
     return (
         <NavigationContainer>

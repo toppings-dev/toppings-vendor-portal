@@ -30,7 +30,7 @@ class AccessCodeGate extends React.Component {
     }
 
     async _handleGoToHomeScreen() {
-        this.props.route.params._handleSetupGatePassed()
+        //this.props.route.params._handleSetupGatePassed()
     }
 
     render() {

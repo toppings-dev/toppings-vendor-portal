@@ -44,7 +44,7 @@ const ProfilePhotoScreen =(props) => {
             }
 
             
-            props.route.params._handleSetupGatePassed()
+            //props.route.params._handleSetupGatePassed()
             return
         }
 

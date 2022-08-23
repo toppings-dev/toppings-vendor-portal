@@ -92,9 +92,9 @@ const loadFonts = async () => {
 const startupSequence = async () => {
     try {
         await loadFonts();
-        await checkDevicePermissions();
-        await initializeFirebase();
-        await UserAPI.authenticateUser();
+        //await checkDevicePermissions();
+        //await initializeFirebase();
+        //await UserAPI.authenticateUser();
     }
     catch (e){
         return {
