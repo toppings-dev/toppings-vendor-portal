@@ -1,14 +1,12 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  Platform,
-  KeyboardAvoidingView,
-  Touchable
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import awsConfig from '../../utils/awsConfig';
 import Amplify from 'aws-amplify';
@@ -155,66 +153,78 @@ const SignUpScreen = (props) => {
 
  return (
   <View style={styles.loginDiv}>
-    {(errorMsg == "" && successMsg != "") ? <Text style={styles.successMessage}>{successMsg}</Text> : null}
-    {(errorMsg != "") ? <Text style={styles.errorMessage}>{errorMsg}</Text> : null}
-    {(!signedUp && !confirmed) ? (
-      <View>
-        <TextInput 
-          placeholder="Name" 
-          value={name}
-          onChangeText={(text)=> setName(text)}
-          autoCorrect={true}
-        />
-        <TextInput 
-          placeholder="Email Address" 
-          value={email}
-          onChangeText={(text)=> setEmail(text)}
-          autoFocus={false}
-          autoCorrect= {false}
-        />
-        <TextInput 
-          placeholder="Phone Number" 
-          value={phoneNumber}
-          onChangeText={(text)=> setPhoneNumber(text)}
-          autoCorrect={false}
-        />
-        <TextInput 
-          placeholder="Password" 
-          value={password}
-          onChangeText={(text)=> setPassword(text)}
-          autoCorrect={false}
-          secureTextEntry={true}
-        />
-        <KeyboardAvoidingView>
-          <TouchableOpacity activeOpacity={0.5} onPress={signUp}>
-            <Text>Submit</Text>
+    <KeyboardAwareScrollView contentContainerStyle={{ alignItems: 'center' }}>
+      {(errorMsg != "" || successMsg != "") ? (
+        <Text style={{...styles.titleText, marginTop: 10}}>Vendor Portal</Text>
+      ) : (
+        <Text style={styles.titleText}>Vendor Portal</Text>
+      )}
+      {(errorMsg == "" && successMsg != "") ? <Text style={styles.successMessage}>{successMsg}</Text> : null}
+      {(errorMsg != "") ? <Text style={styles.errorMessage}>{errorMsg}</Text> : null}
+      {(!signedUp && !confirmed) ? (
+        <View style={{ alignItems: 'center' }}>
+          <Text style={styles.label}>Name</Text>
+          <TextInput 
+            value={name}
+            onChangeText={(text)=> setName(text)}
+            autoCorrect={true}
+            style={styles.input}
+          />
+          <Text style={styles.label}>Email Address</Text>
+          <TextInput 
+            value={email}
+            onChangeText={(text)=> setEmail(text)}
+            autoCorrect= {false}
+            style={styles.input}
+          />
+          <Text style={styles.label}>Phone Number</Text>
+          <TextInput 
+            value={phoneNumber}
+            onChangeText={(text)=> setPhoneNumber(text)}
+            autoCorrect={false}
+            style={styles.input}
+          />
+          <Text style={styles.label}>Password</Text>
+          <TextInput 
+            value={password}
+            onChangeText={(text)=> setPassword(text)}
+            autoCorrect={false}
+            secureTextEntry={true}
+            style={styles.input}
+          />
+          <TouchableOpacity activeOpacity={0.5} onPress={signUp} style={styles.button}>
+            <Text style={{ color: '#007eff', fontWeight: 'bold' }}>Submit</Text>
           </TouchableOpacity>
-        </KeyboardAvoidingView>
-      </View>
-    ) : signedUp && !confirmed && (
-      <View>
-        <TextInput 
-          placeholder="Restaurant Id" 
-          value={restaurantId}
-          onChangeText={(text)=> setRestaurantId(text)}
-          autoCorrect={true}
-        />
-        <TextInput 
-          placeholder="Confirmation Code" 
-          value={confirmationCode}
-          onChangeText={(text)=> setConfirmationCode(text)}
-          autoFocus={false}
-          autoCorrect= {false}
-        />
-        <KeyboardAvoidingView>
-          <TouchableOpacity activeOpacity={0.5} onPress={confirmSignUp}>
-            <Text>Submit</Text>
+        </View>
+      ) : signedUp && !confirmed && (
+        <View style={{ alignItems: 'center' }}>
+          <Text style={styles.label}>Restaurant Id</Text>
+          <TextInput 
+            value={restaurantId}
+            onChangeText={(text)=> setRestaurantId(text)}
+            autoCorrect={true}
+            style={styles.input}
+          />
+          <Text style={styles.label}>Confirmation Code</Text>
+          <TextInput 
+            value={confirmationCode}
+            onChangeText={(text)=> setConfirmationCode(text)}
+            autoCorrect= {false}
+            style={styles.input}
+          />
+          <TouchableOpacity activeOpacity={0.5} onPress={confirmSignUp} style={styles.button}>
+            <Text style={{ color: '#007eff', fontWeight: 'bold' }}>Submit</Text>
           </TouchableOpacity>
-        </KeyboardAvoidingView>
+        </View>
+      )}
+    
+      <View style={{ flexDirection: 'row', marginTop: 12 }}>
+        <Text style={{ color: '#FFFFFF' }}>Already have an account?</Text>
+        <TouchableOpacity activeOpacity={0.5} onPress={handleLogInScreen}>
+          <Text style={styles.signup}>Sign In</Text>
+        </TouchableOpacity>
       </View>
-    )}
-   
-    <Text>Already have an account? <TouchableOpacity activeOpacity={0.5} onPress={handleLogInScreen}><Text>Sign In</Text></TouchableOpacity></Text>
+      </KeyboardAwareScrollView>
   </View>
  )
 }
@@ -230,12 +240,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 25,
   },
+  titleText: {
+    color: '#FFFFFF',
+    fontFamily: 'fat-frank-regular',
+    fontSize: 48,
+    marginTop: 30,
+    marginBottom: 20,
+  },
   successMessage: {
     borderWidth: 1,
     borderColor: '#1b5e20',
     borderStyle: 'solid',
     backgroundColor: '#a5d6a7',
     color: '#1b5e20',
+    width: 350,
+    textAlign: 'center',
+    marginBottom: 10,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
   },
   errorMessage: {
     borderWidth: 1,
@@ -244,10 +267,42 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#ef9a9a',
     color: '#b71c1c',
-    width: 400,
+    width: 350,
     margin: 'auto',
-    padding: 8,
-  }
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  input: {
+    backgroundColor: '#FFFFFF',
+    width: 350,
+    borderRadius: 4,
+    color: '#000000',
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    marginBottom: 10,
+  },
+  label: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginBottom: 2,
+  },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 3,
+    marginTop: 15,
+    width: 'auto',
+    alignItems: 'center',
+  },
+  signup: {
+    color: '#FFFFFF',
+    textDecorationLine: 'underline',
+    marginLeft: 2,
+  },
 });
 
 export default SignUpScreen;

@@ -37,6 +37,7 @@ const App = () => {
     useEffect(()=>{
         LogBox.ignoreLogs([
             'Native splash screen is already hidden.',
+            'AsyncStorage has been extracted from react-native core and will be removed in a future release.',
         ]);
 
         let isMounted = true;
@@ -48,16 +49,13 @@ const App = () => {
         });
         
         SplashScreen.preventAutoHideAsync();
-        loadResourcesAsync();
-
-        return () => { isMounted = false };
-        
-
-        //uncomment to log out
+        loadResourcesAsync()
         // Cognito.signOut();
         // setLoggedIn(false);
         // clearSession("user");
         // clearSession("page");
+
+        return () => { isMounted = false };
     }, []);
 
     const loadResourcesAsync = async () => {
@@ -72,9 +70,10 @@ const App = () => {
         if (!readyToOpenApp.success) {
             console.log(readyToOpenApp)
             //setShowSetupGate(true);
+        } else {
+          await handleFinishLoading();  
         }
         
-        await handleFinishLoading();  
 
     }
 
@@ -89,7 +88,6 @@ const App = () => {
     // }
 
     const handleFinishLoading = async () => {
-        setIsLoadingComplete(true);
         await SplashScreen.hideAsync();
     }
   
@@ -115,7 +113,12 @@ const App = () => {
                               :
                                   !loggedIn ?
                                   // <SetupGate _handleSetupGatePassed= {_handleSetupGatePassed} showSetupGate={showSetupGate ? "true" : "false"}/>
-                                  <SetupGate Cognito={Cognito} showSetupGate={showSetupGate ? "true" : "false"} setUser={setUser} setLoggedIn={setLoggedIn}/>
+                                  <SetupGate 
+                                    Cognito={Cognito} 
+                                    showSetupGate={showSetupGate ? "true" : "false"} 
+                                    setUser={setUser} 
+                                    setLoggedIn={setLoggedIn} 
+                                  />
                                   :<AppNavigator currentUser={user} />
                           }
                   </View>

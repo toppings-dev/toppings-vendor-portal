@@ -4,8 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import awsConfig from '../utils/awsConfig';
 import Amplify from 'aws-amplify';
-// import { useQuery } from '@apollo/client';
-// import * as customQueries from '../graphql/customQueries';
+import { useQuery } from '@apollo/client';
+import * as customQueries from '../graphql/customQueries';
 
 // Theme
 // var Global = require('../assets/styles/global');
@@ -143,20 +143,6 @@ const ModalStackScreen = () => {
 
 const RootStack = createStackNavigator();
 const RootStackScreen = (props) => {
-  const [restaurant, setRestaurant] = useState();
-  const { currentUser } = props;
-
-  // let { data, error, loading } = useQuery(customQueries.GET_RESTAURANT_BY_OWNER, {
-  //   skip: currentUser.username === 'all@gmail.com',
-  // });
-  // if (error) {
-  //   console.log("error", error);
-  // }
-  // console.log("data", data);
-  // if (data?.getRestaurantByOwner) {
-  //   setRestaurant(data.getRestaurantByOwner);
-  // }
-
     return (
         <RootStack.Navigator
           screenOptions={({route, navigation}) => ({
@@ -174,7 +160,7 @@ const RootStackScreen = (props) => {
                 name="Orders"
                 component={OrdersScreen}
                 options={{ headerShown: false }}
-                initialParams={{...props, restaurant}}
+                initialParams={{...props}}
             />
           
             <RootStack.Screen

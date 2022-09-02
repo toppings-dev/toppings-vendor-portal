@@ -8,7 +8,7 @@ class CognitoClient {
       userPoolParams = {
         UserPoolId: 'local_08k2xaAy',
         ClientId: 'd0fw03t1cu3pq3726kyyg4mn5',
-        endpoint: 'http://192.168.0.244:9229/',
+        endpoint: 'http://192.168.0.245:9229/',
       };
     } else {
       userPoolParams = {
