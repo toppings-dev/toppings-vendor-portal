@@ -4,6 +4,7 @@ import {
   Text,
   ImageBackground,
   View,
+  ScrollView,
   TextInput,
   TouchableOpacity,
   Platform,
@@ -197,20 +198,22 @@ const OrdersScreen = (props) => {
             <View style={styles.ordersSubcontainer}>
               <View style={styles.nameSubcontainer}>
                 {/* <TouchableOpacity activeOpacity={0.5} onPress={handleButton}>
-                  <Text>Button</Text>
+                  <Text>View Past Orders</Text>
                 </TouchableOpacity> */}
-                {parties.map((party) => 
-                  <PartyContainer 
-                    key={party.id}
-                    party={party}
-                    selectedOrder={selectedOrder}
-                    setSelectedOrder={setSelectedOrder}
-                    selectedRun={selectedRun}
-                    setSelectedRun={setSelectedRun}
-                    assembleSelectedRun={assembleSelectedRun}
-                    isAll={currentUser.username === 'all@gmail.com'}
-                  />
-                )}
+                <ScrollView>
+                  {parties.map((party) => 
+                    <PartyContainer 
+                      key={party.id}
+                      party={party}
+                      selectedOrder={selectedOrder}
+                      setSelectedOrder={setSelectedOrder}
+                      selectedRun={selectedRun}
+                      setSelectedRun={setSelectedRun}
+                      assembleSelectedRun={assembleSelectedRun}
+                      isAll={currentUser.username === 'all@gmail.com'}
+                    />
+                  )}
+                </ScrollView>
               </View>
               {(!selectedOrder && !selectedRun) && (
                 <View style={styles.orderInfoSubcontainer}>
