@@ -11,18 +11,18 @@ const httpLink = new HttpLink({
   uri: __DEV__ ? apolloLocal : apolloProd,
 });
 
-// const promiseToObservable = promise =>
-//   new Observable(subscriber => {
-//     promise.then(
-//       value => {
-//         if (subscriber.closed) return;
-//         subscriber.next(value);
-//         subscriber.complete();
-//       },
-//       err => subscriber.error(err)
-//     );
-//     return subscriber; // this line can removed, as per next comment
-//   });
+const promiseToObservable = promise =>
+  new Observable(subscriber => {
+    promise.then(
+      value => {
+        if (subscriber.closed) return;
+        subscriber.next(value);
+        subscriber.complete();
+      },
+      err => subscriber.error(err)
+    );
+    return subscriber; // this line can removed, as per next comment
+  });
   
 const authLink = setContext(async (_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -46,11 +46,13 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
         case 'UNAUTHENTICATED':
           console.log('LMAO');
           const Cognito = new CognitoClient();
-          // const refreshToken = async () => {
-          //   await Cognito.refreshTokens();
-          //   return await Cognito.setTokens();
-          // };
-          // return promiseToObservable(refreshToken()).flatMap(() => forward(operation));
+          const refreshToken = async () => {
+            console.log("errorlink")
+            await Cognito.refreshTokens();
+            console.log("error link two")
+            return await Cognito.setTokens();
+          };
+          return promiseToObservable(refreshToken()).flatMap(() => forward(operation));
       }
     }
   }

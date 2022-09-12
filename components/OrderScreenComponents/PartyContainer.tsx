@@ -54,16 +54,21 @@ const PartyContainer: React.FC<Props> = ({ party, selectedOrder, setSelectedOrde
   return(
     <View>
       <TouchableOpacity activeOpacity={0.5} onPress={handleToggleExpand}>
-        <View style={styles.partyNameContainer}>
-          {partyViewed ? (
+        {partyViewed ? (
+          <View style={styles.partyNameContainer}>
             <Image source={GrayArrow} style={styles.arrow} />
-          ) : (
+            <Text style={selectedRun?.id === party.id ? { ...styles.name, fontFamily: 'cabin-bold' } : { ...styles.name, fontFamily: 'cabin-regular' }}>
+              {party.deliverer.name}'s Group {isAll ? `at ${party.restaurant.name}` : ''}
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.partyNameContainer}>
             <Image source={BlueArrow} style={styles.arrow} />
-          )}
-          <Text style={selectedRun?.id === party.id ? { ...styles.name, fontFamily: 'cabin-bold' } : { ...styles.name, fontFamily: 'cabin-regular', color: '#0082FF' }}>
-            {party.deliverer.name}'s Group {isAll ? `at ${party.restaurant.name}` : ''}
-          </Text>
-        </View>
+            <Text style={selectedRun?.id === party.id ? { ...styles.name, fontFamily: 'cabin-bold', color: '#0082FF' } : { ...styles.name, fontFamily: 'cabin-regular', color: '#0082FF' }}>
+              {party.deliverer.name}'s Group {isAll ? `at ${party.restaurant.name}` : ''}
+            </Text>
+          </View>
+        )}
       </TouchableOpacity>
       {expanded && 
         <View>

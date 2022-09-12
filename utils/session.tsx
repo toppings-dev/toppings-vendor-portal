@@ -26,6 +26,7 @@ async function getUnverifiedUser() {
 }
 
 function setTokens(data) {
+  console.log("set tokens", data);
   AsyncStorage.setItem('idToken', data.idToken.jwtToken);
   AsyncStorage.setItem('accessToken', data.accessToken.jwtToken);
   AsyncStorage.setItem('refreshToken', data.refreshToken.token);

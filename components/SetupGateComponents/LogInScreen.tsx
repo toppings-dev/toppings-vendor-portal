@@ -39,12 +39,21 @@ const LogInScreen = (props) => {
         password: password,
       };
       console.log(user);
+      let isError = false;
+      let result;
+      try {
+        result = await Cognito.authenticateUser(email, password);
+      } catch (error) {
+        console.log("log in error,", error);
+        isError = true;
+        setErrorMsg('Username/Password may be incorrect!');
+      }
+      if (!isError) {
+        console.log("auth sign in", result);
+        await Cognito.setTokens();
+        //setTokens(result);
 
-      const result = await Cognito.authenticateUser(email, password);
-      console.log("auth sign in", result);
-      setTokens(result);
-
-      const currentUser = await Cognito.getCurrentUserAttributes();
+        const currentUser = await Cognito.getCurrentUserAttributes();
 
         const userWithSub = {
           ...user,
@@ -52,13 +61,13 @@ const LogInScreen = (props) => {
         };
         setCurrentUser(userWithSub);
             
-      if (getCurrentPage() == null) {
-        setCurrentPage("orders");
+        if (getCurrentPage() == null) {
+          setCurrentPage("orders");
+        }
+
+        setUser(userWithSub);
+        setLoggedIn(true);
       }
-
-
-      setUser(userWithSub);
-      setLoggedIn(true);
     } else {
       setErrorMsg("Login info is incomplete.");
     }

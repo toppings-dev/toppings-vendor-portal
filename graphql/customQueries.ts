@@ -274,6 +274,143 @@ export const LIST_PARTIES_BY_RESTAURANT = gql`
   }
 `;
 
+export const LIST_PAST_PARTIES_BY_RESTAURANT = gql`
+  query ListPastPartiesByRestaurant($restaurantId: String!) {
+    listPastPartiesByRestaurant(restaurantId: $restaurantId) {
+      id
+      windowOpenTime
+      windowCloseTime
+      dropoffLocation
+      isPublic
+      usersOpenTo {
+        id
+        name
+        pfp
+        username
+        phoneNumber
+      }
+      groupsOpenTo {
+        id
+        name
+        image
+      }
+      isClaimed
+      deliverer {
+        id
+        name
+        pfp
+        username
+        phoneNumber
+      }
+      status
+      estimatedDeliveryTimeWindow {
+        begin
+        end
+      }
+      restaurantFinishedPreparingTimeWindow {
+        begin
+        end
+      }
+      restaurantFinishedPreparingMinutes
+      maxOrders
+      totalCost
+      orders {
+        id
+        customer {
+          id
+          name
+          pfp
+          phoneNumber
+          username
+        }
+        deliverer {
+          id
+          name
+          pfp
+          phoneNumber
+          username
+        }
+        items {
+          id
+          menuItem {
+            id
+            name
+            description
+            price
+            reward {
+              points
+              discount
+              discountText
+            }
+            numOrders
+            image
+            foodOptions {
+              name
+              numChoices
+              options {
+                name
+                price
+                points
+              }
+            }
+          }
+          discount
+          price
+          points
+          comment
+          quantity
+          foodOptions {
+            name
+            options {
+              name
+              price
+              points
+            }
+          }
+        }
+        restaurant {
+          id
+          name
+          thumbnail
+          averagePickupTime {
+            begin
+            end
+          }
+        }
+        estimatedDeliveryTimeWindow {
+          begin
+          end
+        }
+        restaurantFinishedPreparingTimeWindow {
+          begin
+          end
+        }
+        restaurantFinishedPreparingMinutes
+        priceBeforeDiscount
+        priceAfterDiscount
+        discount
+        tax
+        tip
+        totalPrice
+        isPaid
+        status
+        comment
+        orderSentTime
+        dropoffLocation
+      }
+      restaurant {
+        id
+        name
+        thumbnail
+        averagePickupTime {
+          begin
+          end
+        }
+      }
+    }
+  }
+`;
+
 export const LIST_ORDERS_BY_RESTAURANT = gql`
   query ListOrdersByRestaurant($restaurantId: String!) {
     listOrdersByRestaurant(restaurantId: $restaurantId) {

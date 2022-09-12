@@ -41,10 +41,11 @@ const OrdersScreen = (props) => {
   const dingTimer = 5000;
 
   const playSound = async () => {
-    const { sound } = await Audio.Sound.createAsync(ding);
+    // const { sound } = await Audio.Sound.createAsync(ding, { shouldPlay: true });
+    const { sound } = await Audio.Sound.createAsync(ding, { shouldPlay: true });
     setSoundState(sound);
     await sound.playAsync();
-    soundState.unloadAsync();
+    //soundState.unloadAsync();
   }
 
   const updateRestaurant = (data) => {
@@ -76,7 +77,6 @@ const OrdersScreen = (props) => {
 
   if (partiesData?.listPartiesByRestaurant || allPartiesData?.listInProgressParties) {
     let rawParties = partiesData?.listPartiesByRestaurant;
-    console.log("rawParties", rawParties);
     if (allPartiesData?.listInProgressParties) {
       rawParties = allPartiesData.listInProgressParties;
     }
@@ -168,9 +168,20 @@ const OrdersScreen = (props) => {
     });
   };
 
+  const handleButton = () => {
+    props.navigation.navigate("History");
+  }
+  
   useInterval(() => {
     playSound();
   }, hasUnviewed ? dingTimer : null);
+
+  useEffect(() => {
+    return soundState
+      ? () => {
+          soundState.unloadAsync(); }
+      : undefined;
+   }, [soundState]);
 
  return (
   <View>
@@ -185,6 +196,9 @@ const OrdersScreen = (props) => {
           {(parties.length > 0) ? (
             <View style={styles.ordersSubcontainer}>
               <View style={styles.nameSubcontainer}>
+                {/* <TouchableOpacity activeOpacity={0.5} onPress={handleButton}>
+                  <Text>Button</Text>
+                </TouchableOpacity> */}
                 {parties.map((party) => 
                   <PartyContainer 
                     key={party.id}
@@ -356,7 +370,7 @@ const styles = StyleSheet.create({
   },
   nameSubcontainer: {
     width: '30%',
-    alignItems: 'center',
+    //alignItems: 'center',
     borderRightWidth: 2,
     padding: 25,
   },
@@ -379,6 +393,7 @@ const styles = StyleSheet.create({
   orderName: {
     fontFamily: 'raleway-extrabold',
     fontSize: 26,
+    color: '#000000'
   },
   date: {
     fontFamily: 'cabin-medium',
@@ -407,6 +422,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     color: '#0082FF',
     alignSelf: 'center',
+    marginTop: 20,
   },
   left: {
     display: 'flex',

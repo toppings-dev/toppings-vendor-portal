@@ -23,6 +23,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import SampleModalScreen from '../screens/SampleModalScreen';
 import SetupGateStackScreen from 'components/SetupGateComponents/SetupGateStackScreen'
 import OrdersScreen from '../screens/OrdersScreen';
+import HistoryScreen from '../screens/HistoryScreen';
 
 Amplify.configure(awsConfig);
 
@@ -162,8 +163,16 @@ const RootStackScreen = (props) => {
                 options={{ headerShown: false }}
                 initialParams={{...props}}
             />
-          
+
             <RootStack.Screen
+                name="History"
+                component={HistoryScreen}
+                options={{ headerShown: false }}
+                initialParams={{...props}}
+            />
+            
+          
+            {/* <RootStack.Screen
                 name="Tabs"
                 component={TabScreen}
                 options={{ headerShown: false }}
@@ -183,7 +192,7 @@ const RootStackScreen = (props) => {
                 options={{
                     headerShown: false,
                 }}
-            />
+            /> */}
 
             
         </RootStack.Navigator>
