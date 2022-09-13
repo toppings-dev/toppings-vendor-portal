@@ -225,7 +225,7 @@ const OrdersScreen = (props) => {
                 </View>
               )}
               {selectedRun && (
-                <View style={{ width: '70%', padding: 25 }}>
+                <ScrollView style={{ width: '70%', padding: 25 }}>
                   <View style={styles.spaceBetween}>
                     <Text style={styles.orderName}>
                       {selectedRun.deliverer.name}'s Group {currentUser.username === 'all@gmail.com' ? `at ${selectedRun.restaurant.name}` : ''}
@@ -290,51 +290,51 @@ const OrdersScreen = (props) => {
                       )}
                     </View>
                   )}
-                </View>
+                </ScrollView>
               )}
               {selectedOrder && (
-                <View style={{ width: '70%', padding: 25 }}>
-                <View style={styles.spaceBetween}>
-                  <Text style={styles.orderName}>
-                  {selectedOrder.customer.name}  {currentUser.username === 'all@gmail.com' ? `at ${selectedOrder.restaurant.name}` : ''}
-                  </Text>
-                  <Text style={styles.date}>
-                  {dayjs(selectedOrder.orderSentTime).format('MM/DD/YY hh:mmA')}
-                  </Text>
-                </View>
-
-                <View style={{ borderBottomColor: 'black', borderBottomWidth: 2, marginVertical: 15 }} />
-
-                {selectedOrder.items.map(item => (
-                  <View key={item.id} style={{ ...styles.spaceBetween, paddingBottom: 8 }}>
-                    <View>
-                      <Text style={styles.itemName}>
-                        {item.quantity > 1 && `${item.quantity}x `}
-                        {item.menuItem.name}
-                      </Text>
-                      {item.foodOptions.map(foodOption => (
-                        foodOption.options.map((option, index) => <Text key={index} style={styles.itemTopping}>{option.name}</Text>)
-                      ))}
-                    </View>
-                    <Text style={styles.itemPrice}>
-                      {(item.quantity * item.price / 100).toFixed(2)}
+                <ScrollView style={{ width: '70%', padding: 25 }}>
+                  <View style={styles.spaceBetween}>
+                    <Text style={styles.orderName}>
+                    {selectedOrder.customer.name}  {currentUser.username === 'all@gmail.com' ? `at ${selectedOrder.restaurant.name}` : ''}
+                    </Text>
+                    <Text style={styles.date}>
+                    {dayjs(selectedOrder.orderSentTime).format('MM/DD/YY hh:mmA')}
                     </Text>
                   </View>
-                ))}
 
-                <View style={{ ...styles.spaceBetween, paddingBottom: 8 }}>
-                  <Text style={{ ...styles.itemProperties, color: '#5F5E5E' }}>Tax</Text>
-                  <Text style={{ ...styles.itemPrice, color: '#5F5E5E' }}>{(selectedOrder.tax / 100).toFixed(2)}</Text>
-                </View>
-                <View style={{ ...styles.spaceBetween, paddingBottom: 8 }}>
-                  <Text style={{ ...styles.itemProperties, color: '#5F5E5E' }}>Tip</Text>
-                  <Text style={{ ...styles.itemPrice, color: '#5F5E5E' }}>{(selectedOrder.tip / 100).toFixed(2)}</Text>
-                </View>
-                <View style={styles.spaceBetween}>
-                  <Text style={styles.itemProperties}>Total</Text>
-                  <Text style={styles.itemPrice}>${(selectedOrder.totalPrice / 100).toFixed(2)}</Text>
-                </View>
-              </View>
+                  <View style={{ borderBottomColor: 'black', borderBottomWidth: 2, marginVertical: 15 }} />
+
+                  {selectedOrder.items.map(item => (
+                    <View key={item.id} style={{ ...styles.spaceBetween, paddingBottom: 8 }}>
+                      <View>
+                        <Text style={styles.itemName}>
+                          {item.quantity > 1 && `${item.quantity}x `}
+                          {item.menuItem.name}
+                        </Text>
+                        {item.foodOptions.map(foodOption => (
+                          foodOption.options.map((option, index) => <Text key={index} style={styles.itemTopping}>{option.name}</Text>)
+                        ))}
+                      </View>
+                      <Text style={styles.itemPrice}>
+                        {(item.quantity * item.price / 100).toFixed(2)}
+                      </Text>
+                    </View>
+                  ))}
+
+                  <View style={{ ...styles.spaceBetween, paddingBottom: 8 }}>
+                    <Text style={{ ...styles.itemProperties, color: '#5F5E5E' }}>Tax</Text>
+                    <Text style={{ ...styles.itemPrice, color: '#5F5E5E' }}>{(selectedOrder.tax / 100).toFixed(2)}</Text>
+                  </View>
+                  <View style={{ ...styles.spaceBetween, paddingBottom: 8 }}>
+                    <Text style={{ ...styles.itemProperties, color: '#5F5E5E' }}>Tip</Text>
+                    <Text style={{ ...styles.itemPrice, color: '#5F5E5E' }}>{(selectedOrder.tip / 100).toFixed(2)}</Text>
+                  </View>
+                  <View style={styles.spaceBetween}>
+                    <Text style={styles.itemProperties}>Total</Text>
+                    <Text style={styles.itemPrice}>${(selectedOrder.totalPrice / 100).toFixed(2)}</Text>
+                  </View>
+                </ScrollView>
               )}
             </View>
           ) : (
