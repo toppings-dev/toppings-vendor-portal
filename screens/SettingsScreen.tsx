@@ -38,9 +38,9 @@ const settingsOptions = [{
 ]
 
 class SettingsScreen extends React.Component {
-	public state: any;
-	public props: any;
-	public context: any;
+	declare state: any;
+	declare props: any;
+	declare context: any;
 
     constructor(props) {
         super(props)

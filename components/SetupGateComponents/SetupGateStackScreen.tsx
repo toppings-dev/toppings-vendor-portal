@@ -8,6 +8,8 @@ import VerifySMSCodeScreen from 'components/SetupGateComponents/VerifySMSCodeScr
 import NameScreen from 'components/SetupGateComponents/NameScreen'
 import HandleScreen from 'components/SetupGateComponents/HandleScreen'
 import ProfilePhotoScreen from 'components/SetupGateComponents/ProfilePhotoScreen'
+import LogInScreen from 'components/SetupGateComponents/LogInScreen';
+import SignUpScreen from 'components/SetupGateComponents/SignUpScreen';
 
 const SetupGateStack = createStackNavigator();
 const SetupGateStackScreen = (props) => {
@@ -18,7 +20,23 @@ const SetupGateStackScreen = (props) => {
               animationEnabled: Platform.OS == 'android' ? false : true,
             })}
         >
-            <SetupGateStack.Screen
+          <SetupGateStack.Screen
+              name="LogInScreen"
+              component={LogInScreen}
+              options = {{
+                  headerShown:false,
+              }}
+              initialParams={props}
+          />
+          <SetupGateStack.Screen
+              name="SignUpScreen"
+              component={SignUpScreen}
+              options = {{
+                  headerShown:false,
+              }}
+              initialParams={props}
+          />
+            {/* <SetupGateStack.Screen
                 name="GetStarted"
                 component={GetStartedScreen}
                 options = {{
@@ -66,7 +84,7 @@ const SetupGateStackScreen = (props) => {
                     headerShown:false,
                 }}
                 initialParams={props}
-            />
+            /> */}
         </SetupGateStack.Navigator>
     )
 }

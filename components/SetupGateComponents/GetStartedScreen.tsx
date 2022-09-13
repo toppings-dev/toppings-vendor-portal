@@ -14,11 +14,9 @@ import * as Linking from 'expo-linking';
 
 
 class AccessCodeGate extends React.Component {
-	public state: any;
-	public props: any;
-	public context: any;
-  //idk if this is broken
-  //used to be public state: any , public props...
+	declare state: any;
+	declare props: any;
+	declare context: any;
 
     constructor(props) {
         super(props);
@@ -32,7 +30,7 @@ class AccessCodeGate extends React.Component {
     }
 
     async _handleGoToHomeScreen() {
-        this.props.route.params._handleSetupGatePassed()
+        //this.props.route.params._handleSetupGatePassed()
     }
 
     render() {

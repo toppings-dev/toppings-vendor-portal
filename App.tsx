@@ -18,80 +18,115 @@ var LocalAPI = require('./clientAPI/local');
 import AppNavigator from './navigation/AppNavigator';
 import SetupGate from 'components/SetupGateComponents/SetupGateNavigator'
 import { Root } from "native-base";
-import "./shim";
+
+import { ApolloProvider } from '@apollo/client';
+import client from './client';
+import CognitoClient from './utils/CognitoClient';
+import { getCurrentUser, clearSession } from './utils/session';
 
 const App = () => {
     const [isLoadingComplete, setIsLoadingComplete] = useState<Boolean>(false);
     const [showSetupGate, setShowSetupGate] = useState<Boolean>(false);
-
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [user, setUser] = useState({});
+    // let user;
+    // let loggedIn;
+    
+    const Cognito = new CognitoClient();
 
     useEffect(()=>{
         LogBox.ignoreLogs([
             'Native splash screen is already hidden.',
+            'AsyncStorage has been extracted from react-native core and will be removed in a future release.',
         ]);
 
-        SplashScreen.preventAutoHideAsync()
+        let isMounted = true;
+        getCurrentUser().then(currentUser => {
+          if (isMounted) {
+            setUser(currentUser);
+            setLoggedIn(!!currentUser);
+          };
+        });
+        
+        SplashScreen.preventAutoHideAsync();
         loadResourcesAsync()
-    
+        // Cognito.signOut();
+        // setLoggedIn(false);
+        // clearSession("user");
+        // clearSession("page");
+
+        return () => { isMounted = false };
     }, []);
 
     const loadResourcesAsync = async () => {
-        await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
         let readyToOpenApp = await LocalAPI.startupSequence();
-
-        if (readyToOpenApp.success) {
-            _handleSetupGatePassed()
-        }
+      
+        // if (readyToOpenApp.success) {
+        //     _handleSetupGatePassed()
+        // }
 
         if (!readyToOpenApp.success) {
             console.log(readyToOpenApp)
-            setShowSetupGate(true);
+            //setShowSetupGate(true);
+        } else {
+          await handleFinishLoading();  
         }
+        
 
-        await handleFinishLoading()
     }
 
-    const _handleSetupGatePassed = () => {
-        setShowSetupGate(false);
-    }
+    // const _handleSetupGatePassed = () => {
+    //     setShowSetupGate(false);
+    // }
 
-    // In this case, you might want to report the error to your error reporting
-    // service, for example Sentry
-    const handleLoadingError = (error) => {
-        console.warn(error);
-    }
+    // // In this case, you might want to report the error to your error reporting
+    // // service, for example Sentry
+    // const handleLoadingError = (error) => {
+    //     console.warn(error);
+    // }
 
     const handleFinishLoading = async () => {
-        setIsLoadingComplete(true);
         await SplashScreen.hideAsync();
     }
-
   
     return (
-        <AppearanceProvider>
-        <ThemeProvider>
-            <SafeAreaProvider>
-            <Root>
-                    <StatusBar style="light" />
-                    <View style={styles.container}>
-                        {
-                            !isLoadingComplete ? 
-                                <AppLoading
-                                    startAsync={loadResourcesAsync}
-                                    onFinish={() => setIsLoadingComplete(true)}
-                                    onError = {console.warn}
-                                />
-                            :
-                                showSetupGate ?
-                                <SetupGate _handleSetupGatePassed= {_handleSetupGatePassed} showSetupGate={showSetupGate ? "true" : "false"}/>
-                                :<AppNavigator/>
-                        }
-                </View>
-            </Root>
-            </SafeAreaProvider>
-        </ThemeProvider>
-        </AppearanceProvider>
+      <ApolloProvider client={client}>
+          <AppearanceProvider>
+          <ThemeProvider>
+              <SafeAreaProvider>
+              <Root>
+                      <StatusBar style="light" />
+                      <View style={styles.container}>
+                        {/* {!loggedIn ? 
+                        <SetupGate />
+                        :<AppNavigator/>
+                        } */}
+                          {
+                              !isLoadingComplete ? 
+                                  <AppLoading
+                                      startAsync={loadResourcesAsync}
+                                      onFinish={() => setIsLoadingComplete(true)}
+                                      onError = {console.warn}
+                                  />
+                              :
+                                  !loggedIn ?
+                                  // <SetupGate _handleSetupGatePassed= {_handleSetupGatePassed} showSetupGate={showSetupGate ? "true" : "false"}/>
+                                  <SetupGate 
+                                    Cognito={Cognito} 
+                                    showSetupGate={showSetupGate ? "true" : "false"} 
+                                    setUser={setUser} 
+                                    setLoggedIn={setLoggedIn} 
+                                  />
+                                  :<AppNavigator currentUser={user} />
+                          }
+                  </View>
+              </Root>
+              </SafeAreaProvider>
+          </ThemeProvider>
+          </AppearanceProvider>
+        </ApolloProvider>
     )
 }
 
