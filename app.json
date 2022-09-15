@@ -1,61 +1,61 @@
 {
-    "expo":
-    {
-        "userInterfaceStyle": "automatic",
-        "name": "Expo Boilerplate",
-        "slug": "Boilerplate",
-        "privacy": "public",
-        "platforms": [
-            "ios",
-            "android",
-            "web"
-        ],
-        "version": "0.0.1",
-        "icon": "./assets/images/AppIcon.png",
-        "splash":
-        {
-            "image": "./assets/images/SplashScreen.png",
-            "resizeMode": "cover",
-            "backgroundColor": "#000000"
-        },
-        "updates":
-        {
-            "fallbackToCacheTimeout": 0
-        },
-        "assetBundlePatterns": [
-            "**/*"
-        ],
-        "ios":
-        {
-            "supportsTablet": false,
-            "backgroundColor": "#000000",
-            "bundleIdentifier": "com.TODO.TODO",
-            "buildNumber": "0.0.1",
-            "userInterfaceStyle": "dark",
-            "requireFullScreen": true,
-            "infoPlist": {
-            }
-
-        },
-        "description": "App description",
-        "backgroundColor": "#000000",
-
-        "packagerOpts":
-        {
-            "config": "metro.config.js",
-            "sourceExts": [
-                "expo.ts",
-                "expo.tsx",
-                "expo.js",
-                "expo.jsx",
-                "ts",
-                "tsx",
-                "js",
-                "jsx",
-                "json",
-                "wasm",
-                "svg"
-            ]
-        }
+  "expo": {
+    "userInterfaceStyle": "automatic",
+    "name": "Expo Boilerplate",
+    "slug": "Boilerplate",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "0.0.1",
+    "icon": "./assets/images/AppIcon.png",
+    "splash": {
+      "image": "./assets/images/SplashScreen.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "backgroundColor": "#000000",
+      "bundleIdentifier": "com.TODO.TODO",
+      "buildNumber": "0.0.1",
+      "userInterfaceStyle": "dark",
+      "requireFullScreen": true,
+      "infoPlist": {}
+    },
+    "description": "App description",
+    "backgroundColor": "#000000",
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "expo.ts",
+        "expo.tsx",
+        "expo.js",
+        "expo.jsx",
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "wasm",
+        "svg"
+      ]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7ea7b5f4-5be5-4ae0-b72c-2ba394225c06"
+      }
+    },
+    "android": {
+      "package": "com.toppingsapp.vendorapp"
     }
+  }
 }
