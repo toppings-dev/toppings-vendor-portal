@@ -6,10 +6,12 @@ class CognitoClient {
   constructor() {
     let userPoolParams;
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      const testURL = "10.0.0.247"; 
+
       userPoolParams = {
         UserPoolId: 'local_08k2xaAy',
         ClientId: 'd0fw03t1cu3pq3726kyyg4mn5',
-        endpoint: 'http://192.168.0.245:9229/',
+        endpoint: `http://${testURL}:9229`,
       };
     } else {
       userPoolParams = {

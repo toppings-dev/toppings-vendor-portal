@@ -35,21 +35,25 @@ const App = () => {
     const Cognito = new CognitoClient();
 
     useEffect(()=>{
-        LogBox.ignoreLogs([
-            'Native splash screen is already hidden.',
-            'AsyncStorage has been extracted from react-native core and will be removed in a future release.',
-        ]);
-
         let isMounted = true;
-        getCurrentUser().then(currentUser => {
+
+        const loadAsync = async () => {
+          LogBox.ignoreLogs([
+              'Native splash screen is already hidden.',
+              'AsyncStorage has been extracted from react-native core and will be removed in a future release.',
+          ]);
+
+          const currentUser = await getCurrentUser();
           if (isMounted) {
             setUser(currentUser);
             setLoggedIn(!!currentUser);
           };
-        });
-        
-        SplashScreen.preventAutoHideAsync();
-        loadResourcesAsync()
+          
+          await SplashScreen.preventAutoHideAsync();
+          await loadResourcesAsync()
+        };
+
+        loadAsync();
         // Cognito.signOut();
         // setLoggedIn(false);
         // clearSession("user");
