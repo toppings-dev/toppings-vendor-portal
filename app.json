@@ -1,8 +1,8 @@
 {
   "expo": {
     "userInterfaceStyle": "automatic",
-    "name": "Expo Boilerplate",
-    "slug": "Boilerplate",
+    "name": "Toppings Vendor Portal",
+    "slug": "vendor-portal",
     "privacy": "public",
     "platforms": [
       "ios",
@@ -10,9 +10,9 @@
       "web"
     ],
     "version": "0.0.1",
-    "icon": "./assets/images/AppIcon.png",
+    "icon": "./assets/images/IconWhite.png",
     "splash": {
-      "image": "./assets/images/SplashScreen.png",
+      "image": "./assets/images/ToppingsPrintBlue.png",
       "resizeMode": "cover",
       "backgroundColor": "#000000"
     },

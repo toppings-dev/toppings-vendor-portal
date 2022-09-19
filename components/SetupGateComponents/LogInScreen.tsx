@@ -75,7 +75,7 @@ const LogInScreen = (props) => {
 
  return (
     <View style={styles.loginDiv}>
-    <KeyboardAwareScrollView contentContainerStyle={{ alignItems: 'center' }}>
+    <KeyboardAwareScrollView contentContainerStyle={{ alignItems: 'center' }} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
 
       {(errorMsg != "") ? (
         <View style={{ alignItems: 'center' }}>

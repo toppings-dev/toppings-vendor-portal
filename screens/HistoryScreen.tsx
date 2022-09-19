@@ -125,7 +125,7 @@ const HistoryScreen = (props) => {
                 <TouchableOpacity activeOpacity={0.5} onPress={handleButton}>
                   <Text>View Current Orders</Text>
                 </TouchableOpacity>
-                <ScrollView>
+                <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
                   {parties.map((party) => 
                     <PastPartyContainer 
                       key={party.id}
