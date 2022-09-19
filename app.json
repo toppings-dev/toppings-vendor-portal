@@ -55,7 +55,7 @@
       }
     },
     "android": {
-      "package": "com.toppings.toppingsvendor"
+      "package": "com.toppingsapp.vendorapp"
     }
   }
 }
