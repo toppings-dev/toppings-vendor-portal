@@ -153,7 +153,7 @@ const SignUpScreen = (props) => {
 
  return (
   <View style={styles.loginDiv}>
-    <KeyboardAwareScrollView contentContainerStyle={{ alignItems: 'center' }}>
+    <KeyboardAwareScrollView contentContainerStyle={{ alignItems: 'center' }} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
       {(errorMsg != "" || successMsg != "") ? (
         <Text style={{...styles.titleText, marginTop: 10}}>Vendor Portal</Text>
       ) : (
