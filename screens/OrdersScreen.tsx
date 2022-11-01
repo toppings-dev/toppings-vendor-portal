@@ -200,7 +200,7 @@ const OrdersScreen = (props) => {
                 {/* <TouchableOpacity activeOpacity={0.5} onPress={handleButton}>
                   <Text>View Past Orders</Text>
                 </TouchableOpacity> */}
-                <ScrollView>
+                <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
                   {parties.map((party) => 
                     <PartyContainer 
                       key={party.id}
@@ -226,7 +226,7 @@ const OrdersScreen = (props) => {
               )}
               {selectedRun && (
                 <View style={{ width: '70%', padding: 25 }}>
-                  <ScrollView>
+                  <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
                     <View style={styles.spaceBetween}>
                       <Text style={styles.orderName}>
                         {selectedRun.deliverer.name}'s Group {currentUser.username === 'all@gmail.com' ? `at ${selectedRun.restaurant.name}` : ''}
@@ -296,7 +296,7 @@ const OrdersScreen = (props) => {
               )}
               {selectedOrder && (
                 <View style={{ width: '70%', padding: 25 }}>
-                  <ScrollView>
+                  <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
                     <View style={styles.spaceBetween}>
                       <Text style={styles.orderName}>
                       {selectedOrder.customer.name}  {currentUser.username === 'all@gmail.com' ? `at ${selectedOrder.restaurant.name}` : ''}
