@@ -6,12 +6,13 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import awsConfig from '../../utils/awsConfig';
 import Amplify from 'aws-amplify';
 
-import { setCurrentUser, getCurrentPage, setCurrentPage, setTokens } from '../../utils/session';
+import { setCurrentUser, getCurrentPage, setCurrentPage } from '../../utils/session';
+
+import { colors, font } from '../../styles';
 
 Amplify.configure(awsConfig);
 
@@ -75,63 +76,69 @@ const LogInScreen = (props) => {
 
  return (
     <View style={styles.loginDiv}>
-    <KeyboardAwareScrollView contentContainerStyle={{ alignItems: 'center' }} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
-
-      {(errorMsg != "") ? (
-        <View style={{ alignItems: 'center' }}>
-          <Text style={{...styles.titleText, marginTop: 60}}>Vendor Portal</Text>
-          <Text style={styles.errorMessage}>{errorMsg}</Text>
-        </View>
-      ) : (
-        <Text style={{...styles.titleText}}>Vendor Portal</Text>
-      )}
-      <Text style={styles.label}>Email Address</Text>
-      <TextInput 
-        value={email}
-        onChangeText={(text)=> setEmail(text)}
-        autoCorrect= {false}
-        style={styles.input}
-      />
-      <Text style={styles.label}>Password</Text>
-      <TextInput 
-        value={password}
-        onChangeText={(text)=> setPassword(text)}
-        autoCorrect={false}
-        secureTextEntry={true}
-        style={styles.input}
-      />
-      <TouchableOpacity activeOpacity={0.5} onPress={login} style={styles.button}>
-        <Text style={{ color: '#007eff', fontWeight: 'bold' }}>Submit</Text>
-      </TouchableOpacity>
-      <View style={{ flexDirection: 'row', marginTop: 12 }}>
-        <Text style={{ color: '#FFFFFF' }}>Don't have an account?</Text>
-        <TouchableOpacity activeOpacity={0.5} onPress={handleSignUpScreen}>
-          <Text style={styles.signup}>Sign Up</Text>
+      <View style={styles.leftContainer}>
+        <Text style={[font.h1, font.white]}>
+          Manage orders.{'\n'}
+          Edit Menus.{'\n'}
+          View financial reports.{'\n'}
+        </Text>
+      </View>
+      <View style={styles.rightContainer}>
+        {(errorMsg != "") &&
+          <View style={{ position: 'absolute', top: 56, left: 70}}>
+            <Text style={styles.errorMessage}>{errorMsg}</Text>
+          </View>
+        }
+        <Text style={font.h1}>Log In</Text>
+        <Text style={[font.p, font.gray, { marginBottom: 28 }]}>Sign in to manage orders, edit menus, and view financial reports.</Text>
+        <TextInput 
+          value={email}
+          onChangeText={(text)=> setEmail(text)}
+          autoCorrect= {false}
+          style={[font.p, styles.input]}
+          placeholder="Email"
+        />
+        <TextInput 
+          value={password}
+          onChangeText={(text)=> setPassword(text)}
+          autoCorrect={false}
+          secureTextEntry={true}
+          style={[font.p, styles.input]}
+          placeholder="Password"
+        />
+        <TouchableOpacity activeOpacity={0.5} onPress={handleSignUpScreen} style={{ marginLeft: 12 }}>
+          <Text style={[font.p, font.bold, font.blue]}>Forgot Password? (Sign up)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.5} onPress={login} style={styles.button}>
+          <Text style={[font.p, font.white, font.bold]}>Log In</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAwareScrollView>
-
     </View>
  )
 }
 
 const styles = StyleSheet.create({
   loginDiv: {
-    backgroundColor: '#007eff',
-    color: '#ffffff',
     width: '100%',
     height: '100%',
     display: 'flex',
+    flexDirection: 'row',
     textAlign: 'center',
     alignItems: 'center',
-    paddingTop: 25,
   },
-  titleText: {
-    color: '#FFFFFF',
-    fontFamily: 'fat-frank-regular',
-    fontSize: 48,
-    marginTop: 80,
-    marginBottom: 20,
+  leftContainer: {
+    flex: 1,
+    paddingLeft: 70,
+    height: '100%',
+    backgroundColor: colors.blue,
+    justifyContent: 'center'
+  },
+  rightContainer: {
+    paddingHorizontal: 70,
+    flex: 1,
+    height: '100%',
+    backgroundColor: '#FFF',
+    justifyContent: 'center'
   },
   errorMessage: {
     borderWidth: 1,
@@ -149,32 +156,23 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#FFFFFF',
-    width: 350,
-    borderRadius: 4,
-    color: '#000000',
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    marginBottom: 10,
-  },
-  label: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    fontSize: 14,
-    marginBottom: 2,
+    width: '80%',
+    borderRadius: 16,
+    color: colors.gray,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    marginBottom: 16,
+    borderColor: colors.gray,
+    borderWidth: 0.5,
   },
   button: {
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 15,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 3,
-    marginTop: 15,
-    width: 'auto',
+    backgroundColor: colors.blue,
+    borderRadius: 16,
+    marginTop: 28,
+    width: '80%',
     alignItems: 'center',
-  },
-  signup: {
-    color: '#FFFFFF',
-    textDecorationLine: 'underline',
-    marginLeft: 2,
   },
 });
 
