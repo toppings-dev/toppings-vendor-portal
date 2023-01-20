@@ -2,15 +2,15 @@
 
 // Light theme colors
 export const lightColors = {
-  background: 'pink', // used to be #FFFFFF
+  background: '#FFFFFF',
   overflow: "pink",
   base: 'pink', //https://blog.superhuman.com/how-to-design-delightful-dark-themes/
   surface: '#d3d9e6', // old: #27292D
   overlayDark: '#343434',
   overlayLight: '#383B40',
   primary: '#512DA8', // this is accent color
-  primaryText: 'red',
-  secondaryText: 'white',
+  primaryText: '#000',
+  secondaryText: '#707070',
   disabledText: "#5C5C5C",
   error: '#D32F2F',
 };
