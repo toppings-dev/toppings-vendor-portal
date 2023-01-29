@@ -12,6 +12,7 @@ export const lightColors = {
   primaryText: '#000',
   secondaryText: '#707070',
   disabledText: "#5C5C5C",
+  divider: "#E8E8E8",
   error: '#D32F2F',
 };
 
