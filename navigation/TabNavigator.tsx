@@ -10,7 +10,6 @@ import {useTheme} from 'assets/styles/ThemeProvider';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Screens
-import SampleModalScreen from '../screens/SampleModalScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import MenuScreen from '../screens/MenuScreen';
 import ReportsScreen from '../screens/ReportsScreen';

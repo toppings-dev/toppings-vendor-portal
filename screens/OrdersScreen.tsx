@@ -18,7 +18,6 @@ import * as customQueries from "../graphql/customQueries";
 import * as customMutations from "../graphql/customMutations";
 
 import LoadingBubbleIcon from "../assets/icons/bubble-icon-1";
-import BubbleIcon from "../assets/icons/bubble-icon-2";
 import ding from "../assets/audio/ding.mp3";
 import PartyContainer from "../components/OrdersScreenComponents/PartyContainer";
 import WhiteGradient from "../assets/images/toppings-print-white-gradient.png";

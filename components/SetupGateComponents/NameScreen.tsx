@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 // var Global = require('assets/styles/global');
-import { connect } from 'react-redux'
 import * as LocalAPI from 'clientAPI/local'
 import * as UserAPI from 'clientAPI/users'
 

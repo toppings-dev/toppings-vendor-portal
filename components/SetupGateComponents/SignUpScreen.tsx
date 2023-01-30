@@ -8,16 +8,18 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import awsConfig from '../../utils/awsConfig';
-import Amplify from 'aws-amplify';
+import * as customQueries from "../../graphql/customQueries";
+import * as customMutations from "../../graphql/customMutations";
+import { useMutation } from "@apollo/client";
 
-import * as customQueries from '../../graphql/customQueries';
-import * as customMutations from '../../graphql/customMutations';
-import { useMutation } from '@apollo/client';
-
-import { setUnverifiedUser, getUnverifiedUser, setTokens, setCurrentUser, getCurrentPage, setCurrentPage } from '../../utils/session';
-
-Amplify.configure(awsConfig);
+import {
+  setUnverifiedUser,
+  getUnverifiedUser,
+  setTokens,
+  setCurrentUser,
+  getCurrentPage,
+  setCurrentPage,
+} from "../../utils/session";
 
 interface CognitoResp {
   codeDeliveryDetails: string,

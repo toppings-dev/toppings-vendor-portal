@@ -8,7 +8,7 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import {useTheme} from 'assets/styles/ThemeProvider';
 
-import SearchScreenDemo from '../components/SearchScreenComponents/SearchScreenDemo';
+import SearchScreenDemo from "../components/BlankScreen";
 
 interface Styles {
   container: ViewStyle

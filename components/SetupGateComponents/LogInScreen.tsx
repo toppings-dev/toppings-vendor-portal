@@ -7,14 +7,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import awsConfig from '../../utils/awsConfig';
-import Amplify from 'aws-amplify';
+import {
+  setCurrentUser,
+  getCurrentPage,
+  setCurrentPage,
+} from "../../utils/session";
 
-import { setCurrentUser, getCurrentPage, setCurrentPage } from '../../utils/session';
-
-import { colors, font } from '../../styles';
-
-Amplify.configure(awsConfig);
+import { colors, font } from "../../styles";
 
 const LogInScreen = (props) => {
   const { Cognito, setUser, setLoggedIn } = props.route.params;

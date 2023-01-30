@@ -5,10 +5,9 @@ import TabNavigator from './TabNavigator';
 
 export default function AppNavigator(props) {
     return (
-        <NavigationContainer>
-            {/* <RootStack {...props}/> */}
-            <TabNavigator {...props}/>
-        </NavigationContainer>
-
+      <NavigationContainer>
+        {/* <RootStack {...props} /> */}
+        <TabNavigator {...props} />
+      </NavigationContainer>
     );
 }
