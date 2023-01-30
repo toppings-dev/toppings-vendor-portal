@@ -9,7 +9,7 @@ import Pill from "../Pill";
 import { RunStatus } from "../../../enums";
 
 type Props = {
-  party: Party;
+  party: any;
   index: number;
   selectedRun: any;
   setSelectedRun: React.Dispatch<React.SetStateAction<any>>;
