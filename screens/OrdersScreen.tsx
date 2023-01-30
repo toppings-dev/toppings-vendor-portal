@@ -36,7 +36,7 @@ const OrdersScreen = (props) => {
 
   const [restaurant, setRestaurant] = useState<any>();
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [selectedRun, setSelectedRun] = useState(null);
+  const [selectedRun, setSelectedRun] = useState<Party>(null);
   const [soundState, setSoundState] = useState<Audio.Sound>();
 
   const orderTimes = [10, 15, 20, 25, 30, 45, 60, 75];

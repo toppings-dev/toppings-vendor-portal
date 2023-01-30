@@ -9,10 +9,10 @@ import Pill from "../Pill";
 import { RunStatus } from "../../../enums";
 
 type Props = {
-  party: any;
+  party: Party;
   index: number;
-  selectedRun: any;
-  setSelectedRun: React.Dispatch<React.SetStateAction<any>>;
+  selectedRun: Party;
+  setSelectedRun: React.Dispatch<React.SetStateAction<Party>>;
 };
 const GroupCard: React.FC<Props> = (props: Props) => {
   const { party, index, selectedRun, setSelectedRun } = props;

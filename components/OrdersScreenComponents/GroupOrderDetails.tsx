@@ -13,7 +13,7 @@ import { RunStatus } from "../../enums";
 import MarkStatusButton from "./MarkStatusButton";
 
 type Props = {
-  selectedRun: any;
+  selectedRun: Party;
   handleUpdatePartyEta: () => void;
 };
 const GroupOrderDetails: React.FC<Props> = (props: Props) => {
