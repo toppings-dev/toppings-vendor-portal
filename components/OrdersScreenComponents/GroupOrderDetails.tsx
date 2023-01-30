@@ -126,7 +126,7 @@ const GroupOrderDetails: React.FC<Props> = (props: Props) => {
                 <View style={{ marginLeft: 8 }} key={order.id}>
                   <Avatar
                     initials={nameToInitials(order.customer?.name)}
-                    color={colors.avatarColors[index]}
+                    color={colors.avatarColors[index % 2]} // Change this when we have more colors
                   />
                 </View>
               ))}
