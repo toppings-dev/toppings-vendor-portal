@@ -6,7 +6,7 @@ export const LIST_IN_PROGRESS_PARTIES = gql`
       id
       windowOpenTime
       windowCloseTime
-      dropoffLocations
+      dropoffLocation
       isPublic
       usersOpenTo {
         id
@@ -132,6 +132,7 @@ export const LIST_IN_PROGRESS_PARTIES = gql`
           begin
           end
         }
+        commission
       }
     }
   }
@@ -269,6 +270,7 @@ export const LIST_PARTIES_BY_RESTAURANT = gql`
           begin
           end
         }
+        commission
       }
     }
   }
@@ -406,6 +408,7 @@ export const LIST_PAST_PARTIES_BY_RESTAURANT = gql`
           begin
           end
         }
+        commission
       }
     }
   }
