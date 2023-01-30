@@ -38,7 +38,7 @@ const ItemsTable: React.FC<Props> = (props: Props) => {
                 <View style={{ flex: 1, alignItems: "flex-end" }}>
                   <Avatar
                     initials={nameToInitials(order.customer?.name)}
-                    color={colors.avatarColors[orderIndex % 2]} // Change this when we have more colors
+                    color={colors.avatarColors[orderIndex % 10]}
                   />
                 </View>
               </View>
