@@ -7,7 +7,7 @@ const styles: any = {};
 
 export const ThemeContext = React.createContext({
     isDark: true,
-    colors: darkColors,
+    colors: lightColors,
     styles: styles,
     setScheme: (scheme: any) => {},
 });
