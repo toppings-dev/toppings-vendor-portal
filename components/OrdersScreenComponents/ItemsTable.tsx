@@ -7,7 +7,7 @@ import { nameToInitials } from "./utils/nameToInitials";
 import { foodOptionsToString } from "./utils/foodOptionsToString";
 
 type Props = {
-  orders: any;
+  orders: Order[];
 };
 
 const ItemsTable: React.FC<Props> = (props: Props) => {

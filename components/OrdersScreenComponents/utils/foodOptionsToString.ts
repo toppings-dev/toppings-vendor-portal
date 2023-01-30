@@ -1,4 +1,6 @@
-export function foodOptionsToString(foodOptions: any): string {
+export function foodOptionsToString(
+  foodOptions: OrderItemFoodOption[]
+): string {
   var string = foodOptions
     .map(function (foodOption) {
       return foodOption.options.reduce(function (acc, option) {
