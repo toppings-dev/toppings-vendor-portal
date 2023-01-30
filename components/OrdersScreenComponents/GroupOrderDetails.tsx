@@ -1,28 +1,10 @@
 import React, { useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  RefreshControl,
-  Dimensions,
-  TouchableOpacity,
-  Text,
-  Image,
-  Linking,
-  ImageBackground,
-  TextInput,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-} from "react-native";
-
+import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
 import dayjs from "dayjs";
 
 import { font, colors } from "../../styles";
 import { uuidTo5Digits } from "./utils/uuidTo5Digits";
 import Avatar from "./Avatar";
-import { ordersByCustomer } from "~/graphql/queries";
 import ItemsTable from "./ItemsTable";
 import { nameToInitials } from "./utils/nameToInitials";
 import Pill from "./Pill";
@@ -31,14 +13,7 @@ import { RunStatus } from "../../enums";
 import MarkStatusButton from "./MarkStatusButton";
 
 type Props = {
-  //   party: any,
-  //   index: number,
-  // selectedOrder: any,
-  // setSelectedOrder: React.Dispatch<React.SetStateAction<any>>,
   selectedRun: any;
-  //   setSelectedRun: React.Dispatch<React.SetStateAction<any>>,
-  //   assembleSelectedRun: (any) => void,
-  //   isAll: boolean,
   handleUpdatePartyEta: () => void;
 };
 const GroupOrderDetails: React.FC<Props> = (props: Props) => {
@@ -49,16 +24,34 @@ const GroupOrderDetails: React.FC<Props> = (props: Props) => {
     setPaymentBreakdownModalOpen(false);
   };
 
+  // Set run status depending on if restaurantFinishedPreparingMinutes is set
   const STATUS: RunStatus = selectedRun.restaurantFinishedPreparingMinutes
     ? RunStatus.IN_PROGRESS
     : RunStatus.PENDING;
 
-  console.log("bruh", selectedRun.restaurant.commission);
+  const TOTAL_PRICE = selectedRun.orders.reduce(function (acc, order) {
+    return acc + order.totalPrice;
+  }, 0); // in cents
+  const COMMISSION_PERCENT = selectedRun.restaurant.commission;
+  const RECEIVE_RESTAURANT = ((100 - COMMISSION_PERCENT) * TOTAL_PRICE) / 10000;
+  const RECEIVE_TOPPINGS = (COMMISSION_PERCENT * TOTAL_PRICE) / 10000;
+
+  // Calculates total number of items in run
+  const numItems = selectedRun.orders.reduce((allTotal, order) => {
+    const sum = order.items.reduce((total, item) => {
+      return total + item.quantity;
+    }, 0);
+    return allTotal + sum;
+  }, 0);
+
   return (
     <View style={[styles.container]}>
       <PaymentBreakdownModal
         modalVisible={isPaymentBreakdownModalOpen}
         handleModalClose={handlePaymentBreakdownClose}
+        TOTAL_PRICE={TOTAL_PRICE}
+        RECEIVE_RESTAURANT={RECEIVE_RESTAURANT}
+        RECEIVE_TOPPINGS={RECEIVE_TOPPINGS}
       />
       {selectedRun?.id !== undefined && (
         <View>
@@ -85,7 +78,7 @@ const GroupOrderDetails: React.FC<Props> = (props: Props) => {
                 }
               />
             </View>
-            <Text style={font.h1}>fuck it have to add fees to backend</Text>
+            <Text style={font.h1}>${RECEIVE_RESTAURANT.toFixed(2)}</Text>
           </View>
           <View
             style={{
@@ -150,7 +143,7 @@ const GroupOrderDetails: React.FC<Props> = (props: Props) => {
           <View style={styles.divider} />
           <View style={{ flexDirection: "row", marginBottom: 4 }}>
             <View style={{ flex: 8 }}>
-              <Text style={font.columnHeaders}>ITEMS(5)</Text>
+              <Text style={font.columnHeaders}>ITEMS({numItems})</Text>
             </View>
             <View style={{ flex: 1, alignItems: "flex-end" }}>
               <Text style={font.columnHeaders}>PRICE</Text>

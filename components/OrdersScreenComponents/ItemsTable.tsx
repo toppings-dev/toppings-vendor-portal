@@ -1,23 +1,6 @@
-import React, { useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  RefreshControl,
-  Dimensions,
-  TouchableOpacity,
-  Text,
-  Image,
-  Linking,
-  ImageBackground,
-  TextInput,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-} from "react-native";
+import React from "react";
+import { View, Text } from "react-native";
 
-import { useTheme } from "assets/styles/ThemeProvider";
 import Avatar from "./Avatar";
 import { font, colors } from "../../styles";
 import { nameToInitials } from "./utils/nameToInitials";
@@ -27,16 +10,13 @@ type Props = {
   orders: any;
 };
 
-const TAX = 7;
 const ItemsTable: React.FC<Props> = (props: Props) => {
   const { orders } = props;
-  // console.log("options:", orders[0].items[0]);
-  // console.log("options:", orders[0].items[0].foodOptions[0].options[0].name);
 
-  console.log("orders", orders[0].items);
   if (orders[0].items === undefined) {
     return <View />;
   }
+
   return (
     <View>
       {orders.map((order, orderIndex) => (
@@ -52,7 +32,7 @@ const ItemsTable: React.FC<Props> = (props: Props) => {
                 </View>
                 <View style={{ flex: 1, alignItems: "flex-end" }}>
                   <Text style={[font.p, font.bold]}>
-                    {(item.menuItem.price / 100).toFixed(2)}
+                    {(item.price / 100).toFixed(2)}
                   </Text>
                 </View>
                 <View style={{ flex: 1, alignItems: "flex-end" }}>
@@ -105,18 +85,5 @@ const ItemsTable: React.FC<Props> = (props: Props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  menuDetails: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  container: {
-    paddingVertical: 20,
-    paddingLeft: 32,
-    paddingRight: 16,
-    borderBottomWidth: 1,
-  },
-});
 
 export default ItemsTable;

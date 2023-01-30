@@ -22,7 +22,6 @@ const StatusInfo = {
 const Pill: React.FC<Props> = (props: Props) => {
   const { status } = props;
 
-  console.log(status);
   return (
     <View
       style={[

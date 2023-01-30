@@ -12,18 +12,14 @@ import {
   Touchable
 } from 'react-native';
 import dayjs from 'dayjs';
-import { Audio } from 'expo-av';
+import { Audio } from "expo-av";
+import { useQuery, useMutation } from "@apollo/client";
+import * as customQueries from "../graphql/customQueries";
+import * as customMutations from "../graphql/customMutations";
 
-import awsConfig from '../utils/awsConfig';
-import useInterval from '../utils/useInterval';
-import Amplify from 'aws-amplify';
-import { useQuery, useMutation } from '@apollo/client';
-import * as customQueries from '../graphql/customQueries';
-import * as customMutations from '../graphql/customMutations';
-
-import LoadingBubbleIcon from '../assets/icons/bubble-icon-1';
-import BubbleIcon from '../assets/icons/bubble-icon-2';
-import ding from '../assets/audio/ding.mp3';
+import LoadingBubbleIcon from "../assets/icons/bubble-icon-1";
+import BubbleIcon from "../assets/icons/bubble-icon-2";
+import ding from "../assets/audio/ding.mp3";
 import PartyContainer from "../components/OrdersScreenComponents/PartyContainer";
 import WhiteGradient from "../assets/images/toppings-print-white-gradient.png";
 import { colors, font } from "./../styles";
@@ -31,9 +27,9 @@ import { useTheme } from "assets/styles/ThemeProvider";
 import GroupCard from "../components/OrdersScreenComponents/LeftMenu/GroupCard";
 import GroupOrderDetails from "../components/OrdersScreenComponents/GroupOrderDetails";
 
-Amplify.configure(awsConfig);
 dayjs().format();
 
+// I'll clean this up later 
 const OrdersScreen = (props) => {
   const { colors } = useTheme();
   const { currentUser } = props.route.params;
@@ -252,12 +248,8 @@ const OrdersScreen = (props) => {
                   key={party.id}
                   index={index}
                   party={party}
-                  // selectedOrder={selectedOrder}
-                  // setSelectedOrder={setSelectedOrder}
                   selectedRun={selectedRun}
                   setSelectedRun={setSelectedRun}
-                  assembleSelectedRun={assembleSelectedRun}
-                  isAll={currentUser.username === "all@gmail.com"}
                 />
               ))}
             </ScrollView>

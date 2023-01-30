@@ -1,21 +1,5 @@
-import React, { useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  RefreshControl,
-  Dimensions,
-  TouchableOpacity,
-  Text,
-  Image,
-  Linking,
-  ImageBackground,
-  TextInput,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-} from "react-native";
+import React from "react";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import dayjs from "dayjs";
 
 import { useTheme } from "assets/styles/ThemeProvider";
@@ -27,45 +11,16 @@ import { RunStatus } from "../../../enums";
 type Props = {
   party: any;
   index: number;
-  // selectedOrder: any,
-  // setSelectedOrder: React.Dispatch<React.SetStateAction<any>>,
   selectedRun: any;
   setSelectedRun: React.Dispatch<React.SetStateAction<any>>;
-  assembleSelectedRun: (any) => void;
-  isAll: boolean;
 };
 const GroupCard: React.FC<Props> = (props: Props) => {
-  const {
-    party,
-    index,
-    // selectedOrder, setSelectedOrder,
-    selectedRun,
-    setSelectedRun,
-    assembleSelectedRun,
-    isAll,
-  } = props;
+  const { party, index, selectedRun, setSelectedRun } = props;
   const { colors } = useTheme();
-  let partyViewed = party.restaurantFinishedPreparingMinutes ? true : false;
 
-  const [expanded, setExpanded] = useState(true);
-
-  const handleToggleExpand = (e) => {
-    e.preventDefault();
-    console.log("select party");
-    // setExpanded(!expanded);
-    assembleSelectedRun(party);
-    // setSelectedOrder(null);
+  const handleSelectGroupCard = () => {
+    setSelectedRun(party);
   };
-
-  // const handleSelectOrder = (e, order) => {
-  //   e.stopPropagation();
-
-  //   console.log("select order");
-
-  //   setSelectedRun(null);
-  //   setSelectedOrder(order);
-  // }
-
   return (
     <View
       style={[
@@ -77,7 +32,7 @@ const GroupCard: React.FC<Props> = (props: Props) => {
         },
       ]}
     >
-      <TouchableOpacity activeOpacity={0.5} onPress={handleToggleExpand}>
+      <TouchableOpacity activeOpacity={0.5} onPress={handleSelectGroupCard}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={font.menuH2}>#{uuidTo5Digits(party.id)}</Text>
           <Pill
@@ -99,10 +54,6 @@ const GroupCard: React.FC<Props> = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  menuDetails: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
   container: {
     paddingVertical: 20,
     paddingLeft: 32,

@@ -1,23 +1,6 @@
-import React, { useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  RefreshControl,
-  Dimensions,
-  TouchableOpacity,
-  Text,
-  Image,
-  Linking,
-  ImageBackground,
-  TextInput,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-} from "react-native";
+import React from "react";
+import { StyleSheet, View, Text } from "react-native";
 
-import { useTheme } from "assets/styles/ThemeProvider";
 import { font } from "../../styles";
 
 type Props = {
@@ -26,8 +9,6 @@ type Props = {
 };
 const Avatar: React.FC<Props> = (props: Props) => {
   const { initials, color } = props;
-  const { colors } = useTheme();
-
   return (
     <View
       style={[
@@ -49,12 +30,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
-  },
-  container: {
-    paddingVertical: 20,
-    paddingLeft: 32,
-    paddingRight: 16,
-    borderBottomWidth: 1,
   },
 });
 

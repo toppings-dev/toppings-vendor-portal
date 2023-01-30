@@ -32,7 +32,7 @@ const MarkStatusButton: React.FC<Props> = (props: Props) => {
   const { status, onPress } = props;
 
   return (
-    // The view is necessary becuase otherwise the button is full width
+    // The View is necessary becuase otherwise the button is full width
     <View style={{ flexDirection: "row" }}>
       <TouchableOpacity
         style={[

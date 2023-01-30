@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
 
 import { font } from "../../styles";
 
 type Props = {
-  party?: any; // change this
   modalVisible: boolean;
   handleModalClose: () => void;
+  TOTAL_PRICE: number;
+  RECEIVE_RESTAURANT: number;
+  RECEIVE_TOPPINGS: number;
 };
 
 const PaymentBreakdownModal: React.FC<Props> = ({
-  party,
   modalVisible,
   handleModalClose,
+  TOTAL_PRICE, // cents
+  RECEIVE_RESTAURANT,
+  RECEIVE_TOPPINGS,
 }) => {
   return (
     <Modal
@@ -31,7 +28,6 @@ const PaymentBreakdownModal: React.FC<Props> = ({
     >
       <View style={styles.container}>
         <View style={styles.roundedCornersContainer}>
-          {/* TODO: Make this button do something */}
           <TouchableOpacity onPress={handleModalClose} style={styles.x}>
             <Image
               source={require("../../assets/icons/BlackX.png")}
@@ -43,15 +39,21 @@ const PaymentBreakdownModal: React.FC<Props> = ({
           </Text>
           <View style={styles.row}>
             <Text style={font.p}>Customer pays</Text>
-            <Text style={[font.p, font.bold]}>$40.22</Text>
+            <Text style={[font.p, font.bold]}>
+              ${(TOTAL_PRICE / 100).toFixed(2)}
+            </Text>
           </View>
           <View style={[styles.row, { marginTop: 8, marginBottom: 24 }]}>
             <Text style={font.p}>Toppings receives</Text>
-            <Text style={[font.p, font.bold]}>needs backend</Text>
+            <Text style={[font.p, font.bold]}>
+              ${RECEIVE_TOPPINGS.toFixed(2)}
+            </Text>
           </View>
           <View style={styles.row}>
             <Text style={font.p}>You receive</Text>
-            <Text style={[font.p, font.bold]}>$40.22</Text>
+            <Text style={[font.p, font.bold]}>
+              ${RECEIVE_RESTAURANT.toFixed(2)}
+            </Text>
           </View>
         </View>
       </View>
