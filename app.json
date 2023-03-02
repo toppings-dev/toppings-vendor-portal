@@ -2,14 +2,14 @@
   "expo": {
     "userInterfaceStyle": "automatic",
     "name": "Toppings Vendor Portal",
-    "slug": "vendor-portal",
+    "slug": "Boilerplate",
     "privacy": "public",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "0.0.1",
+    "version": "1.0.0",
     "icon": "./assets/images/IconWhite.png",
     "splash": {
       "image": "./assets/images/ToppingsPrintBlue.png",
@@ -17,7 +17,8 @@
       "backgroundColor": "#000000"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/7ea7b5f4-5be5-4ae0-b72c-2ba394225c06"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -55,7 +56,14 @@
       }
     },
     "android": {
-      "package": "com.toppingsapp.vendorapp"
+      "package": "com.toppingsapp.vendorapp",
+      "versionCode": 2,
+      "compileSdkVersion": 31,
+      "targetSdkVersion": 31,
+      "buildToolsVersion": "31.0.0"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
