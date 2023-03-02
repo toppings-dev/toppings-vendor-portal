@@ -4,7 +4,7 @@ import { setContext } from '@apollo/client/link/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CognitoClient from './utils/CognitoClient';
 
-const apolloLocal = 'http://10.0.0.247:4000/graphql';
+const apolloLocal = 'http://192.168.4.146:4000/graphql';
 const apolloProd = 'https://api.toppingsapp.com/graphql';
 
 const httpLink = new HttpLink({
